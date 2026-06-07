@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/RecipeApp.Api/RecipeApp.Api.csproj" />
+    <Project Path="src/RecipeApp.Domain/RecipeApp.Domain.csproj" />
+    <Project Path="src/RecipeApp.DomainService/RecipeApp.DomainService.csproj" />
+    <Project Path="src/RecipeApp.Dto/RecipeApp.Dto.csproj" />
+    <Project Path="src/RecipeApp.Exceptions/RecipeApp.Exceptions.csproj" />
+    <Project Path="src/RecipeApp.Facade/RecipeApp.Facade.csproj" />
+    <Project Path="src/RecipeApp.Infrastructure/RecipeApp.Infrastructure.csproj" />
+  </Folder>
+</Solution>
