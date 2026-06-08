@@ -1,9 +1,3 @@
-CREATE DATABASE recipeAppDatabase;
-GO
-
-USE recipeAppDatabase;
-GO
-
 CREATE TABLE [Users] (
   [id] int PRIMARY KEY,
   [email] nvarchar(255) UNIQUE,
@@ -23,20 +17,12 @@ CREATE TABLE [Recipes] (
 )
 GO
 
-CREATE TABLE [RecipesLikes] (
-  [id] int PRIMARY KEY,
-  [recipe_id] int,
-  [user_id] int
-)
-GO
-
 CREATE TABLE [Comments] (
   [id] int PRIMARY KEY,
   [user_id] int,
   [recipe_id] int,
   [title] nvarchar(255),
-  [description] nvarchar(255),
-  [time_created] date
+  [description] nvarchar(255)
 )
 GO
 
@@ -95,40 +81,31 @@ GO
 CREATE INDEX [Recipes_index_2] ON [Recipes] ("name")
 GO
 
-CREATE UNIQUE INDEX [RecipesLikes_index_3] ON [RecipesLikes] ("user_id", "recipe_id")
+CREATE INDEX [Comments_index_3] ON [Comments] ("recipe_id")
 GO
 
-CREATE INDEX [Comments_index_4] ON [Comments] ("recipe_id")
+CREATE INDEX [Ratings_index_4] ON [Ratings] ("recipe_id")
 GO
 
-CREATE INDEX [Ratings_index_5] ON [Ratings] ("recipe_id")
+CREATE UNIQUE INDEX [Ratings_index_5] ON [Ratings] ("user_id", "recipe_id")
 GO
 
-CREATE UNIQUE INDEX [Ratings_index_6] ON [Ratings] ("user_id", "recipe_id")
+CREATE INDEX [Steps_index_6] ON [Steps] ("recipe_id")
 GO
 
-CREATE INDEX [Steps_index_7] ON [Steps] ("recipe_id")
+CREATE INDEX [RecipeIngredients_index_7] ON [RecipeIngredients] ("recipe_id")
 GO
 
-CREATE INDEX [RecipeIngredients_index_8] ON [RecipeIngredients] ("recipe_id")
+CREATE INDEX [RecipeIngredients_index_8] ON [RecipeIngredients] ("ingredient_id")
 GO
 
-CREATE INDEX [RecipeIngredients_index_9] ON [RecipeIngredients] ("ingredient_id")
-GO
-
-CREATE UNIQUE INDEX [RecipeFavorites_index_10] ON [RecipeFavorites] ("user_id", "recipe_id")
+CREATE UNIQUE INDEX [RecipeFavorites_index_9] ON [RecipeFavorites] ("user_id", "recipe_id")
 GO
 
 ALTER TABLE [Recipes] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id])
 GO
 
 ALTER TABLE [Recipes] ADD FOREIGN KEY ([country_id]) REFERENCES [Countries] ([id])
-GO
-
-ALTER TABLE [RecipesLikes] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id])
-GO
-
-ALTER TABLE [RecipesLikes] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id])
 GO
 
 ALTER TABLE [Comments] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id])
