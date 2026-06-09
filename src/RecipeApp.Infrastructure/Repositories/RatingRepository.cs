@@ -18,10 +18,10 @@ namespace RecipeApp.Infrastructure.Repositories
             return await _dbContext.Rating.FindAsync(id);
         }
 
-        public async Task AddAsync(Rating rating)
+        public async Task<Rating> AddAsync(Rating rating)
         {
             await _dbContext.Rating.AddAsync(rating);
-            await _dbContext.SaveChangesAsync();
+            return rating;  
         }
 
         public async Task DeleteAsync(int id)

@@ -24,10 +24,11 @@ namespace RecipeApp.Infrastructure.Repositories
 
     }
 
-    public async Task AddAsync(RecipeFavorite favorite)
+    public async Task<RecipeFavorite> AddAsync(RecipeFavorite favorite)
     {
         await _dbContext.RecipeFavorite.AddAsync(favorite);
         await _dbContext.SaveChangesAsync();
+        return favorite;
     }
 
     }

@@ -7,7 +7,7 @@ namespace RecipeApp.Infrastructure.Repositories
     {
         Task<Ingredient> GetByNameAsync(string name);
         Task<IEnumerable<Ingredient>> GetAllAsync();
-        Task AddAsync(Ingredient ingredient);
+        Task<Ingredient> AddAsync(Ingredient ingredient);
         Task UpdateAsync(Ingredient ingredient);
         Task DeleteAsync(int id, Ingredient ingredient);
     }

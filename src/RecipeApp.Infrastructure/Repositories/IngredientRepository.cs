@@ -22,10 +22,10 @@ namespace RecipeApp.Infrastructure.Repositories
             return await _dbContext.Ingredient.ToListAsync();
         }
 
-        public async Task AddAsync(Ingredient ingredient)
+        public async Task<Ingredient> AddAsync(Ingredient ingredient)
         {
             await _dbContext.Ingredient.AddAsync(ingredient);
-            await _dbContext.SaveChangesAsync();
+            return ingredient;
         }
 
         public async Task UpdateAsync(Ingredient ingredient)
