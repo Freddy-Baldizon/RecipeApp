@@ -10,9 +10,7 @@ public interface IUserRepository
 
     Task<User?> GetByIdAsync(int id);
 
-    Task<bool> FindUserByUsernameAsync(string username);
-
-    Task<bool> FindUserByEmailAsync(string email);
+    Task<User?> FindUserByEmailAsync(string email);
 
     Task<User?> GetByUsername(string username);
 
