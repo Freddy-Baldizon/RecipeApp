@@ -7,7 +7,7 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<Comment> Comments { get; set; }
+    public DbSet<Comment> Comment { get; set; }
     public DbSet<Country> Country { get; set; }
     public DbSet<Ingredient> Ingredient { get; set; }
     public DbSet<Rating> Rating { get; set; }
