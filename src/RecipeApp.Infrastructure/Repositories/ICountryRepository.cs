@@ -5,7 +5,7 @@ namespace RecipeApp.Infrastructure.Repositories
     {
         Task<List<Country>> GetAllAsync();
 
-        Task<Country?> GetByIdAsync(Guid countryId);
+        Task<Country?> GetByIdAsync(int countryId);
 
     }
 }

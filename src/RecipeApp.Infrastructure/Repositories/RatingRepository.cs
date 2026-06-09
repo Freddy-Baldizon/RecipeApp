@@ -13,7 +13,7 @@ namespace RecipeApp.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<Rating> GetByIdAsync(Guid id)
+        public async Task<Rating> GetByIdAsync(int id)
         {
             return await _dbContext.Rating.FindAsync(id);
         }
@@ -24,7 +24,7 @@ namespace RecipeApp.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(int id)
         {
             var rating = await _dbContext.Rating.FindAsync(id);
             if (rating != null)
@@ -34,7 +34,7 @@ namespace RecipeApp.Infrastructure.Repositories
             }
         }
 
-        Task IRatingRepository.DeleteAsync(Guid id)
+        Task IRatingRepository.DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
