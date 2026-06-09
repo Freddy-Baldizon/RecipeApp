@@ -1,4 +1,4 @@
-using ProyectoSW4.Domain.Entities;
+using RecipeApp.Domain.Entities;
 
 namespace RecipeApp.Infrastructure.Repositories;
 
