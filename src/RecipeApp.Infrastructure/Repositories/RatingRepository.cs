@@ -33,10 +33,5 @@ namespace RecipeApp.Infrastructure.Repositories
                 await _dbContext.SaveChangesAsync();
             }
         }
-
-        Task IRatingRepository.DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
