@@ -1,22 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using ProyectoSW4.Domain.Entities;
 
+namespace RecipeApp.Infrastructure.Repositories;
 
-namespace RecipeApp.Infrastructure.Repositories
+public interface IUserRepository
 {
-    public interface IUserRepository
-    {
-        Task<List<User>> GetAllAsync();
-        Task<User> AddAsync(User user);
-        Task<User?> GetByIdAsync(Guid ExternalId);
+    Task<List<User>> GetAllAsync();
 
-        Task<bool> HasUserByUsernameAsync(string UserName);
+    Task<User> AddAsync(User user);
 
-        Task<bool> HasUserByEmailAsync(string Email);
-        Task<User?> GetByUsername(string username);
+    Task<User?> GetByIdAsync(int id);
 
-        Task DeleteAsync(User user);
-    }
+    Task<bool> FindUserByUsernameAsync(string username);
+
+    Task<bool> FindUserByEmailAsync(string email);
+
+    Task<User?> GetByUsername(string username);
+
+    Task DeleteAsync(User user);
 }
