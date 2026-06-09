@@ -9,6 +9,6 @@ namespace RecipeApp.Infrastructure.Repositories
         Task<IEnumerable<Ingredient>> GetAllAsync();
         Task AddAsync(Ingredient ingredient);
         Task UpdateAsync(Ingredient ingredient);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(Guid id, Ingredient ingredient);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.EntityFrameworkCore;
 using RecipeApp.Domain.Entities;
  
@@ -6,39 +5,39 @@ namespace RecipeApp.Infrastructure.Repositories
 {
     public class IngredientRepository : IIngredientRepository
     {
-        private readonly RecipeAppDbContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public IngredientRepository(RecipeAppDbContext dbContext)
+        public IngredientRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<Ingredient> GetByNameAsync(string name)
         {
-            return await _dbContext.Ingredients.FirstOrDefaultAsync(i => i.Name == name);
+            return await _dbContext.Ingredient.FirstOrDefaultAsync(i => i.Name == name);
         }
 
         public async Task<IEnumerable<Ingredient>> GetAllAsync()
         {
-            return await _dbContext.Ingredients.ToListAsync();
+            return await _dbContext.Ingredient.ToListAsync();
         }
 
         public async Task AddAsync(Ingredient ingredient)
         {
-            await _dbContext.Ingredients.AddAsync(ingredient);
+            await _dbContext.Ingredient.AddAsync(ingredient);
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(Ingredient ingredient)
         {
-            _dbContext.Ingredients.Update(ingredient);
+            _dbContext.Ingredient.Update(ingredient);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id, Ingredient ingredient)
         {
 
-                _dbContext.Ingredients.Remove(ingredient);
+                _dbContext.Ingredient.Remove(ingredient);
                 await _dbContext.SaveChangesAsync();
             
         }
