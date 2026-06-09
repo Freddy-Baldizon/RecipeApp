@@ -1,14 +1,13 @@
-using system;
-using recipeapp.domain.entities;
+using RecipeApp.Infrastructure.Repositories;
 
 namespace recipeapp.infrastructure.repositories
 {
 
   public class IngredientRepository : IIngredientRepository
     {
-        private readonly RecipeAppDbContext _dbContext;
+        private readonly AppContext _dbContext;
 
-        public IngredientRepository(RecipeAppDbContext dbContext)
+        public IngredientRepository(AppContext dbContext)
         {
             _dbContext = dbContext;
         }

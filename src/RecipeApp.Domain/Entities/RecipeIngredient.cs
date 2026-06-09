@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSW4.Domain.Entities;
+namespace RecipeApp.Domain.Entities;
 
 [Table("RecipeIngredients")]
 [Index(nameof(RecipeId))]

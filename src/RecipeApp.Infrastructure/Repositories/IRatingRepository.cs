@@ -1,6 +1,5 @@
 using System;
 using RecipeApp.Domain.Entities;
-
 namespace RecipeApp.Infrastructure.Repositories
 {
     public interface IRatingRepository

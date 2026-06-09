@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSW4.Domain.Entities;
+namespace RecipeApp.Domain.Entities;
 
 [Table("Recipes")]
 [Index(nameof(UserId))]
@@ -37,7 +37,7 @@ public class Recipe
     [Column("photo_url")]
     public string? PhotoUrl { get; set; }
 
-    // Propiedades de navegación y llaves foráneas
+    // Propiedades de navegaciï¿½n y llaves forï¿½neas
     [ForeignKey(nameof(UserId))]
     public User User { get; set; } = null!;
 
@@ -45,7 +45,6 @@ public class Recipe
     public Country Country { get; set; } = null!;
 
     // Relaciones hijas
-    public List<RecipeLike> RecipesLikes { get; set; } = [];
     public List<Comment> Comments { get; set; } = [];
     public List<Rating> Ratings { get; set; } = [];
     public List<Step> Steps { get; set; } = [];

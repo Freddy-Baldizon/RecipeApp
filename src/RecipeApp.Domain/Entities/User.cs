@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSW4.Domain.Entities;
+namespace RecipeApp.Domain.Entities;
 
 [Table("Users")]
 [Index(nameof(Email), IsUnique = true)]
@@ -36,7 +36,6 @@ public class User
 
     // Relaciones
     public List<Recipe> Recipes { get; set; } = [];
-    public List<RecipeLike> RecipesLikes { get; set; } = [];
     public List<Comment> Comments { get; set; } = [];
     public List<Rating> Ratings { get; set; } = [];
     public List<RecipeFavorite> RecipeFavorites { get; set; } = [];
