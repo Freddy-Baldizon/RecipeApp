@@ -1,3 +1,7 @@
+CREATE DATABASE RecipeApp;
+GO
+USE RecipeApp;
+
 CREATE TABLE [Users] (
   [id] int PRIMARY KEY,
   [email] nvarchar(255) UNIQUE,

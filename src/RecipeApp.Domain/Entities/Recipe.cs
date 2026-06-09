@@ -37,7 +37,7 @@ public class Recipe
     [Column("photo_url")]
     public string? PhotoUrl { get; set; }
 
-    // Propiedades de navegaci�n y llaves for�neas
+    // Propiedades de navegacion y llaves foroneas
     [ForeignKey(nameof(UserId))]
     public User User { get; set; } = null!;
 
