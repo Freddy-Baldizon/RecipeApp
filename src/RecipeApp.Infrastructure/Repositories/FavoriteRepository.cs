@@ -1,34 +1,34 @@
-using RecipeApp.Infrastructure.Repositories;
-
-namespace recipeapp.infrastructure.repositories
+using RecipeApp.Domain.Entities;
+namespace RecipeApp.Infrastructure.Repositories
 {
 
-  public class IngredientRepository : IIngredientRepository
+  public class FavoriteRepository :  IFavoriteRepository
     {
-        private readonly AppContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public IngredientRepository(AppContext dbContext)
+        public FavoriteRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
- public async Task<Favorite?> GetByIdAsync(Guid FavoriteId)
+ public async Task<RecipeFavorite> GetByIdAsync(int FavoriteId)
     {
-        return await _dbContext.Favorites.FindAsync(FavoriteId);
+        return await _dbContext.RecipeFavorite.FindAsync(FavoriteId);
     }
 
-    public async Task DeleteAsync(Guid FavoriteId)
+    public async Task DeleteAsync(int FavoriteId, RecipeFavorite RecipeFavorite)
     {
     
-        await _dbContext.Favorites.Remove(favorite);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.RecipeFavorite.Remove(RecipeFavorite);
+        await _dbContext.SaveChangesAsync(); 
 
     }
 
-    public async Task AddAsync(Favorite favorite)
+    public async Task AddAsync(RecipeFavorite favorite)
     {
-        await _dbContext.Favorites.AddAsync(favorite);
+        await _dbContext.RecipeFavorite.AddAsync(favorite);
         await _dbContext.SaveChangesAsync();
     }
-}
+
+    }
 }

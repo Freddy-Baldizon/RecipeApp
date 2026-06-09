@@ -34,7 +34,7 @@ namespace RecipeApp.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id, Ingredient ingredient)
+        public async Task DeleteAsync(int id, Ingredient ingredient)
         {
 
                 _dbContext.Ingredient.Remove(ingredient);
