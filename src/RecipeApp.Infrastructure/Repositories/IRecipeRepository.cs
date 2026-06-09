@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ProyectoSW4.Domain.Entities;
+using RecipeApp.Domain.Entities;
 
 namespace RecipeApp.Infrastructure.Repositories
 {

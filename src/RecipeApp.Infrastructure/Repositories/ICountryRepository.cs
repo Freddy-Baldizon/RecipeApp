@@ -1,5 +1,5 @@
-using ProyectoSW4.Domain.Entities;
-namespace recipeApp.Infrastructure.Repositories
+using RecipeApp.Domain.Entities;
+namespace RecipeApp.Infrastructure.Repositories
 {
     public interface ICountryRepository
     {

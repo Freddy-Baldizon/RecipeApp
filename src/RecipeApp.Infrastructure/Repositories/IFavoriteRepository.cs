@@ -1,12 +1,10 @@
-using system;
-using recipeapp.domain.entities;
-
-namespace recipeapp.infrastructure.repositories
+using RecipeApp.Domain.Entities;
+namespace RecipeApp.Infrastructure.Repositories
 {
     public interface IFavoriteRepository
     {
-        Task<Favorite> GetByIdAsync(Guid id);
+        Task<RecipeFavorite> GetByIdAsync(Guid id);
         Task DeleteAsync(Guid id);
-        Task AddAsync(Favorite favorite);
+        Task AddAsync(RecipeFavorite favorite);
     }
 }
