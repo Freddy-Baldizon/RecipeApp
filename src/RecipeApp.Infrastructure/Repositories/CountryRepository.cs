@@ -5,6 +5,11 @@ namespace RecipeApp.Infrastructure.Repositories
     public class CountryRepository : ICountryRepository
     {
         private readonly AppDbContext _dbContext;
+
+        public CountryRepository(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public async Task<List<Country>> GetAllAsync()
         {
             return await _dbContext.Country.ToListAsync();
