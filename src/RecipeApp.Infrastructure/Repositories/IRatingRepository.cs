@@ -6,6 +6,6 @@ namespace RecipeApp.Infrastructure.Repositories
     {
         Task<Rating> GetByIdAsync(int id);
         Task<Rating> AddAsync(Rating rating);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Rating rating);
     }
 }

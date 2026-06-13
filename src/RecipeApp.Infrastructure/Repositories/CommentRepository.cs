@@ -19,10 +19,8 @@ namespace RecipeApp.Infrastructure.Repositories
         public async Task DeleteAsync(Comment comment)
         {
             _dbContext.Comment.Remove(comment);
-           
-        }
-
-        
+            await _dbContext.SaveChangesAsync();
+        }  
 
         public async Task<List<Comment>> GetAllAsync()
         {

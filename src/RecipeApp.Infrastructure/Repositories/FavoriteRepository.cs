@@ -20,11 +20,11 @@ namespace RecipeApp.Infrastructure.Repositories
 
         public async Task DeleteAsync(RecipeFavorite RecipeFavorite)
         {
-
             _dbContext.RecipeFavorite.Remove(RecipeFavorite);
             await _dbContext.SaveChangesAsync();
-
         }
+
+
 
         public async Task<RecipeFavorite> AddAsync(RecipeFavorite favorite)
         {

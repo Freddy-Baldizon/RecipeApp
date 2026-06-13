@@ -5,23 +5,23 @@ namespace RecipeApp.Infrastructure.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly AppDbContext _context;
+    private readonly AppDbContext _dbContext;
 
-    public UserRepository(AppDbContext context)
+    public UserRepository(AppDbContext dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
     public async Task<List<User>> GetAllAsync()
     {
-        return await _context.User.ToListAsync();
+        return await _dbContext.User.ToListAsync();
     }
 
     public async Task<User?> GetByIdAsync(int id)
     {
         //DTO
         //Revisar si ocupamos los include del id del usuario si retorna esos atributos
-        return await _context.User
+        return await _dbContext.User
             // .Include(u => u.Recipes)
             // .Include(u => u.Comments)
             // .Include(u => u.Ratings)
@@ -31,31 +31,31 @@ public class UserRepository : IUserRepository
 
     public async Task<User> AddAsync(User user)
     {
-        await _context.User.AddAsync(user);
+        await _dbContext.User.AddAsync(user);
         return user;
     }
 
     public async Task DeleteAsync(User user)
     {
-        _context.User.Remove(user);
-        await Task.CompletedTask;
+        _dbContext.User.Remove(user);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<bool> FindUserByUsernameAsync(string username)
+    public async Task<User?> FindUserByUsernameAsync(string username)
     {
-        return await _context.User
-            .AnyAsync(u => u.Username == username);
+        return await _dbContext.User
+            .FirstAsync(u => u.Username == username);
     }
 
-    public async Task<bool> FindUserByEmailAsync(string email)
+    public async Task<User?> FindUserByEmailAsync(string email)
     {
-        return await _context.User
-            .AnyAsync(u => u.Email == email);
+        return await _dbContext.User
+            .FirstAsync(u => u.Email == email);
     }
 
     public async Task<User?> GetByUsername(string username)
     {
-        return await _context.User
+        return await _dbContext.User
             .Include(u => u.Recipes)
             .FirstOrDefaultAsync(u => u.Username == username);
     }
