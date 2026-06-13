@@ -24,14 +24,10 @@ namespace RecipeApp.Infrastructure.Repositories
             return rating;  
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Rating rating)
         {
-            var rating = await _dbContext.Rating.FindAsync(id);
-            if (rating != null)
-            {
                 _dbContext.Rating.Remove(rating);
                 await _dbContext.SaveChangesAsync();
-            }
         }
     }
 }
