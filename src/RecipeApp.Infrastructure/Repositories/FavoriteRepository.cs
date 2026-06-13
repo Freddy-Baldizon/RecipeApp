@@ -1,8 +1,9 @@
+using Microsoft.EntityFrameworkCore;
 using RecipeApp.Domain.Entities;
 namespace RecipeApp.Infrastructure.Repositories
 {
 
-  public class FavoriteRepository :  IFavoriteRepository
+    public class FavoriteRepository : IFavoriteRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -12,28 +13,25 @@ namespace RecipeApp.Infrastructure.Repositories
         }
 
         public async Task<List<RecipeFavorite>> GetByUserAsync(int userId)
-    {
-        // return await _dbContext.RecipeFavorite
-        //     // .Include(f => f.Recipe)
-        //     //     .ThenInclude(r => r.Country)
-        //     // .Include(f => f.Recipe)
-        //     //     .ThenInclude(r => r.User)
-        //     //.Where(f => f.UserId == userId)
-        //     .ToListAsync<RecipeFavorite>();
-    }
+        {
+            List<RecipeFavorite> results = await _dbContext.RecipeFavorite.Where(f => f.UserId == userId).ToListAsync();
+            return results;
+        }
 
-    public async Task DeleteAsync(RecipeFavorite RecipeFavorite)
-    {
-        _dbContext.RecipeFavorite.Remove(RecipeFavorite);
-        await _dbContext.SaveChangesAsync(); 
-    }
+        public async Task DeleteAsync(RecipeFavorite RecipeFavorite)
+        {
+            _dbContext.RecipeFavorite.Remove(RecipeFavorite);
+            await _dbContext.SaveChangesAsync();
+        }
 
-    public async Task<RecipeFavorite> AddAsync(RecipeFavorite favorite)
-    {
-        await _dbContext.RecipeFavorite.AddAsync(favorite);
-        await _dbContext.SaveChangesAsync();
-        return favorite;
-    }
+
+
+        public async Task<RecipeFavorite> AddAsync(RecipeFavorite favorite)
+        {
+            await _dbContext.RecipeFavorite.AddAsync(favorite);
+            await _dbContext.SaveChangesAsync();
+            return favorite;
+        }
 
     }
 }
