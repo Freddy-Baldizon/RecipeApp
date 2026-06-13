@@ -3,8 +3,9 @@ namespace RecipeApp.Infrastructure.Repositories
 {
     public interface IFavoriteRepository
     {
-        Task<RecipeFavorite> GetByIdAsync(int id);
-        Task DeleteAsync(int id, RecipeFavorite favorite);
+        Task<List<RecipeFavorite>> GetByUserAsync(int userId);
+        
         Task<RecipeFavorite> AddAsync(RecipeFavorite favorite);
+        Task DeleteAsync(RecipeFavorite favorite);
     }
 }

@@ -11,12 +11,18 @@ namespace RecipeApp.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
- public async Task<RecipeFavorite> GetByIdAsync(int FavoriteId)
+        public async Task<List<RecipeFavorite>> GetByUserAsync(int userId)
     {
-        return await _dbContext.RecipeFavorite.FindAsync(FavoriteId);
+        // return await _dbContext.RecipeFavorite
+        //     // .Include(f => f.Recipe)
+        //     //     .ThenInclude(r => r.Country)
+        //     // .Include(f => f.Recipe)
+        //     //     .ThenInclude(r => r.User)
+        //     //.Where(f => f.UserId == userId)
+        //     .ToListAsync<RecipeFavorite>();
     }
 
-    public async Task DeleteAsync(int FavoriteId, RecipeFavorite RecipeFavorite)
+    public async Task DeleteAsync(RecipeFavorite RecipeFavorite)
     {
     
         _dbContext.RecipeFavorite.Remove(RecipeFavorite);
