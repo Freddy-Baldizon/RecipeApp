@@ -21,12 +21,9 @@ namespace RecipeApp.Infrastructure.Repositories
             _dbContext.Comment.Remove(comment);
            
         }
-
-        
-
-        public async Task<List<Comment>> GetAllAsync()
+        public async Task<List<Comment>> GetAllByRecipeIdAsync(int recipeId)
         {
-            return await _dbContext.Comment.ToListAsync();
+            return await _dbContext.Comment.Where(c => c.RecipeId == recipeId).ToListAsync();
         }
 
         public async Task<Comment?> GetByIdAsync(int commentId)
