@@ -26,6 +26,6 @@ public class StepRepository : IStepRepository
     public async Task DeleteAsync(Step step)
     {
         _context.Step.Remove(step);
-        await Task.CompletedTask;
+        await _context.SaveChangesAsync();
     }
 }
