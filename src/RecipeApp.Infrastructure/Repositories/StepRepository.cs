@@ -5,27 +5,28 @@ namespace RecipeApp.Infrastructure.Repositories;
 
 public class StepRepository : IStepRepository
 {
-    private readonly AppDbContext _context;
+    private readonly AppDbContext _dbContext;
 
     public StepRepository(AppDbContext context)
     {
-        _context = context;
+        _dbContext = context;
     }
 
     public async Task<List<Step>> GetAllAsync()
     {
-        return await _context.Step.ToListAsync();
+        return await _dbContext.Step.ToListAsync();
     }
 
     public async Task<Step> AddAsync(Step step)
     {
-        await _context.Step.AddAsync(step);
+        await _dbContext.Step.AddAsync(step);
         return step;
     }
 
     public async Task DeleteAsync(Step step)
     {
-        _context.Step.Remove(step);
-        await Task.CompletedTask;
+        _dbContext.Step.Remove(step);
+        await _dbContext.SaveChangesAsync();
+        
     }
 }

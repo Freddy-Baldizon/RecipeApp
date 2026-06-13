@@ -5,16 +5,16 @@ namespace RecipeApp.Infrastructure.Repositories;
 
 public class RecipeRepository : IRecipeRepository
 {
-    private readonly AppDbContext _context;
+    private readonly AppDbContext _dbContext;
 
     public RecipeRepository(AppDbContext context)
     {
-        _context = context;
+        _dbContext = context;
     }
 
     public async Task<List<Recipe>> GetAllAsync()
     {
-        return await _context.Recipe
+        return await _dbContext.Recipe
             .Include(r => r.User)
             .Include(r => r.Country)
             .ToListAsync();
@@ -23,7 +23,7 @@ public class RecipeRepository : IRecipeRepository
     public async Task<Recipe?> GetByIdAsync(int id)
      {
             //Devolver solo el id de la receta
-         return await _context.Recipe
+         return await _dbContext.Recipe
     //         .Include(r => r.User)
     //         .Include(r => r.Country)
     //         .Include(r => r.Comments)
@@ -37,7 +37,7 @@ public class RecipeRepository : IRecipeRepository
     public async Task<Recipe?> GetByRecipename(string recipeName)
     {
         //Devolver solo el id del usuario o dejarlo como esta(DTO)
-         return await _context.Recipe
+         return await _dbContext.Recipe
         //     .Include(r => r.User)
         //     .Include(r => r.Country)
             .FirstOrDefaultAsync(r => r.Name == recipeName);
@@ -45,14 +45,14 @@ public class RecipeRepository : IRecipeRepository
 
     public async Task<Recipe> AddAsync(Recipe recipe)
     {
-        await _context.Recipe.AddAsync(recipe);
+        await _dbContext.Recipe.AddAsync(recipe);
         return recipe;
     }
 
     public async Task DeleteAsync(Recipe recipe)
     {
-        _context.Recipe.Remove(recipe);
-        await Task.CompletedTask;
+        _dbContext.Recipe.Remove(recipe);
+        await _dbContext.SaveChangesAsync();
     }
     
 }
