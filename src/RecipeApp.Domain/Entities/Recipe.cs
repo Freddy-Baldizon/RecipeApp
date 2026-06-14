@@ -49,5 +49,5 @@ public class Recipe
     public List<Rating> Ratings { get; set; } = [];
     public List<Step> Steps { get; set; } = [];
     public List<RecipeIngredient> RecipeIngredients { get; set; } = [];
-    public List<RecipeFavorite> RecipeFavorites { get; set; } = [];
+    public List<Favorite> Favorites { get; set; } = [];
 }
