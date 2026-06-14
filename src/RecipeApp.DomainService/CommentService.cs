@@ -23,7 +23,6 @@ public class CommentService : ICommentService
             Title = commentDto.Title,
             Description = commentDto.Description
         };
-
         return _commentRepository.AddAsync(comment);
     }
 

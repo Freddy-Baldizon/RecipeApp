@@ -12,7 +12,7 @@ public class AppDbContext : DbContext
     public DbSet<Ingredient> Ingredient { get; set; }
     public DbSet<Rating> Rating { get; set; }
     public DbSet<Recipe> Recipe { get; set; }
-    public DbSet<RecipeFavorite> RecipeFavorite { get; set; }
+    public DbSet<Favorite> Favorite { get; set; }
     public DbSet<RecipeIngredient> RecipeIngredient { get; set; }
     public DbSet<Step> Step { get; set; }
     public DbSet<User> User { get; set; }
@@ -218,9 +218,9 @@ public class AppDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
-        modelBuilder.Entity<RecipeFavorite>(entity =>
+        modelBuilder.Entity<Favorite>(entity =>
         {
-            entity.ToTable("RecipeFavorites");
+            entity.ToTable("Favorites");
 
             entity.HasKey(e => new { e.UserId, e.RecipeId });
 
@@ -231,12 +231,12 @@ public class AppDbContext : DbContext
                 .IsUnique();
 
             entity.HasOne(e => e.User)
-                .WithMany(u => u.RecipeFavorites)
+                .WithMany(u => u.Favorites)
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(e => e.Recipe)
-                .WithMany(r => r.RecipeFavorites)
+                .WithMany(r => r.Favorites)
                 .HasForeignKey(e => e.RecipeId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
