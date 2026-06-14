@@ -15,7 +15,7 @@ public class CommentService : ICommentService
         _commentRepository = commentRepository;
     }
 
-  public Task<Comment> AddAsync(CommentDto commentDto)
+    public Task<Comment> AddAsync(CommentDto commentDto)
     {
         var comment = new Comment
         {
@@ -50,5 +50,17 @@ public class CommentService : ICommentService
             throw new ResourceNotFoundException($"Comment with ID {commentId} not found.");
         }
         await _commentRepository.DeleteAsync(comment);
+    }
+
+    public async Task<Comment> UpdateAsync(CommentDto commentDto)
+    {
+        var comment = await _commentRepository.GetByIdAsync(commentDto.Id);
+        if (comment == null)
+            throw new ResourceNotFoundException($"Comment with ID {commentDto.Id} not found.");
+
+        comment.Title = commentDto.Title;
+        comment.Description = commentDto.Description;
+
+        return await _commentRepository.UpdateAsync(comment);
     }
 }

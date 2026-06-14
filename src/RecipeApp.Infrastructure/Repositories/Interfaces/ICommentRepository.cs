@@ -7,6 +7,7 @@ namespace RecipeApp.Infrastructure.Repositories.Interfaces
         Task<List<Comment>> GetAllByRecipeIdAsync(int recipeId);
         Task<Comment?> GetByIdAsync(int commentId);
         Task<Comment> AddAsync(Comment comment);
+         Task<Comment> UpdateAsync(Comment comment);
         Task DeleteAsync(Comment comment);
     }
 }
