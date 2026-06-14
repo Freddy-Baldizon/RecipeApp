@@ -33,11 +33,9 @@ public class RatingService : IRatingService
         {
             throw new ResourceNotFoundException($"Rating with ID {rating.Id} not found.");
         }
-        
+
         await _ratingRepository.DeleteAsync(ratingEntity);
     }
-
-
 
     public async Task<Rating> GetByIdAsync(int id)
     {
@@ -51,11 +49,24 @@ public class RatingService : IRatingService
 
     public Task<List<Rating>> GetRatingByRecipeId(int recipeId)
     {
-        throw new NotImplementedException();
+        return _ratingRepository.GetRatingByRecipeId(recipeId);
+    }
+
+    public async Task<Rating> UpdateAsync(RatingDto rating)
+    {
+        var existing = await _ratingRepository.GetByIdAsync(rating.Id);
+        if (existing == null)
+            throw new ResourceNotFoundException($"Rating with ID {rating.Id} not found.");
+
+        existing.Value = rating.Value;
+        existing.UserId = rating.UserId;
+        existing.RecipeId = rating.RecipeId;
+
+        return await _ratingRepository.UpdateAsync(existing);
     }
 
     public Task<List<Rating>> GetRatingByUserId(int userId)
     {
-        throw new NotImplementedException();
+        return _ratingRepository.GetRatingByUserId(userId);
     }
 }

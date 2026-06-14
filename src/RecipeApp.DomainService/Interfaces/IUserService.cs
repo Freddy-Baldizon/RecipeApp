@@ -10,5 +10,6 @@ public interface IUserService
     Task<User?> GetByIdAsync(int id);
     Task<User?> GetByEmailAsync(String email);
     Task<User?> GetByUsername(String username);
+     Task<User> UpdateAsync(int id, UpdateUserDto updateDto);
     Task DeleteAsync(int userId);
 }

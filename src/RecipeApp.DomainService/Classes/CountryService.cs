@@ -2,6 +2,7 @@ using RecipeApp.Domain.Entities;
 using RecipeApp.Infrastructure.Repositories.Interfaces;
 using RecipeApp.Exceptions;
 using RecipeApp.Dto;
+using RecipeApp.DomainService.Interfaces;
 
 namespace RecipeApp.DomainService.Classes;
 

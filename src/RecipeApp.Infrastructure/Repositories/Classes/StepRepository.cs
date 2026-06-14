@@ -30,4 +30,12 @@ public class StepRepository : IStepRepository
         await _dbContext.SaveChangesAsync();
         
     }
+
+    public async Task<Step> UpdateAsync(Step step)
+    {
+        _dbContext.Step.Update(step);
+        await _dbContext.SaveChangesAsync();
+        return step;
+    }
+
 }

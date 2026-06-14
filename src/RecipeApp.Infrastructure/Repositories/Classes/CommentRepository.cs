@@ -27,6 +27,13 @@ namespace RecipeApp.Infrastructure.Repositories.Classes
             return await _dbContext.Comment.Where(c => c.RecipeId == recipeId).ToListAsync();
         }
 
+        public async Task<Comment> UpdateAsync(Comment comment)
+        {
+            _dbContext.Comment.Update(comment);
+            await _dbContext.SaveChangesAsync();
+            return comment;
+        }
+
         public async Task<Comment?> GetByIdAsync(int commentId)
         {
             return await _dbContext.Comment.FindAsync(commentId);

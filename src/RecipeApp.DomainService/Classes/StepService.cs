@@ -33,4 +33,19 @@ public class StepService : IStepService
 
         await _stepRepository.DeleteAsync(step);
     }
+
+    public async Task<Step> UpdateAsync(Step step)
+    {
+        var steps = await _stepRepository.GetAllAsync();
+        var existing = steps.FirstOrDefault(s => s.Id == step.Id);
+        if (existing == null)
+            throw new ResourceNotFoundException($"Step with ID {step.Id} not found.");
+
+        existing.Name = step.Name;
+        existing.Description = step.Description;
+        existing.Order = step.Order;
+        existing.RecipeId = step.RecipeId;
+
+        return await _stepRepository.UpdateAsync(existing);
+    }
 }
