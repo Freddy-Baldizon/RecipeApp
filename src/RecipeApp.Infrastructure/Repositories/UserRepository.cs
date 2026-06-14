@@ -19,14 +19,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> GetByIdAsync(int id)
     {
-        //DTO
-        //Revisar si ocupamos los include del id del usuario si retorna esos atributos
-        return await _dbContext.User
-            // .Include(u => u.Recipes)
-            // .Include(u => u.Comments)
-            // .Include(u => u.Ratings)
-            // .Include(u => u.RecipeFavorites)
-             .FirstOrDefaultAsync(u => u.Id == id);
+        return await _dbContext.User.FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public async Task<User> AddAsync(User user)
