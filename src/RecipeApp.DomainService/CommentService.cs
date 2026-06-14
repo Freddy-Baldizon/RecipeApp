@@ -5,11 +5,11 @@ using RecipeApp.Dto;
 
 namespace RecipeApp.DomainService;
 
-public class RecipeCommentService : ICommentService
+public class CommentService : ICommentService
 {
     private readonly ICommentRepository _commentRepository;
 
-    public RecipeCommentService(ICommentRepository commentRepository)
+    public CommentService(ICommentRepository commentRepository)
     {
         _commentRepository = commentRepository;
     }

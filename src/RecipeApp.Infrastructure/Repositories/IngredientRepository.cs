@@ -17,7 +17,7 @@ namespace RecipeApp.Infrastructure.Repositories
             return await _dbContext.Ingredient.FirstOrDefaultAsync(i => i.Name == name);
         }
 
-        public async Task<IEnumerable<Ingredient>> GetAllAsync()
+        public async Task<List<Ingredient>> GetAllAsync()
         {
             return await _dbContext.Ingredient.ToListAsync();
         }
@@ -34,7 +34,7 @@ namespace RecipeApp.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id, Ingredient ingredient)
+        public async Task DeleteAsync(Ingredient ingredient)
         {
 
                 _dbContext.Ingredient.Remove(ingredient);

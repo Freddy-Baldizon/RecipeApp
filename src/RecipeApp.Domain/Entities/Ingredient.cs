@@ -19,6 +19,5 @@ public class Ingredient
     [Required]
     [Column("name")]
     public required string Name { get; set; }
-
     public List<RecipeIngredient> RecipeIngredients { get; set; } = [];
 }
