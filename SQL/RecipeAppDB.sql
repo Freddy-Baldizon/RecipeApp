@@ -3,7 +3,7 @@ GO
 USE RecipeApp;
 
 CREATE TABLE [Users] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTITY(1,1) PRIMARY KEY,
   [email] nvarchar(255) UNIQUE,
   [username] nvarchar(255) UNIQUE,
   [password] nvarchar(255),
@@ -12,7 +12,7 @@ CREATE TABLE [Users] (
 GO
 
 CREATE TABLE [Recipes] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTITY(1,1) PRIMARY KEY,
   [name] nvarchar(255),
   [description] nvarchar(255),
   [country_id] int,
@@ -22,7 +22,7 @@ CREATE TABLE [Recipes] (
 GO
 
 CREATE TABLE [Comments] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTITY(1,1) PRIMARY KEY,
   [user_id] int,
   [recipe_id] int,
   [title] nvarchar(255),
@@ -31,7 +31,7 @@ CREATE TABLE [Comments] (
 GO
 
 CREATE TABLE [Ratings] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTITY(1,1) PRIMARY KEY,
   [recipe_id] int,
   [user_id] int,
   [value] int
@@ -39,7 +39,7 @@ CREATE TABLE [Ratings] (
 GO
 
 CREATE TABLE [Steps] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTITY(1,1) PRIMARY KEY,
   [recipe_id] int,
   [name] nvarchar(255),
   [description] nvarchar(255),
@@ -48,13 +48,13 @@ CREATE TABLE [Steps] (
 GO
 
 CREATE TABLE [Ingredients] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTITY(1,1) PRIMARY KEY,
   [name] nvarchar(255) UNIQUE
 )
 GO
 
 CREATE TABLE [RecipeIngredients] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTITY(1,1) PRIMARY KEY,
   [recipe_id] int,
   [ingredient_id] int,
   [amount] nvarchar(255)
@@ -62,7 +62,7 @@ CREATE TABLE [RecipeIngredients] (
 GO
 
 CREATE TABLE [Countries] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTITY(1,1) PRIMARY KEY,
   [name] nvarchar(255) UNIQUE,
   [flag_url] nvarchar(255),
   [iso_alpha3] nvarchar(255) UNIQUE
@@ -70,9 +70,10 @@ CREATE TABLE [Countries] (
 GO
 
 CREATE TABLE [RecipeFavorites] (
-  [recipe_id] int,
-  [user_id] int,
-  [created_at] date
+  [recipe_id] int NOT NULL,
+  [user_id]   int NOT NULL,
+  [created_at] date,
+  CONSTRAINT PK_RecipeFavorites PRIMARY KEY ([user_id], [recipe_id])
 )
 GO
 
