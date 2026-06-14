@@ -6,6 +6,6 @@ namespace RecipeApp.DomainService.Interfaces;
 public interface IStepService
 {
     Task<List<Step>> GetAllAsync();
-    Task<Step> AddAsync(Step step);
+    Task<Step> AddAsync(StepDto stepDto);
     Task DeleteAsync(int id);
 }

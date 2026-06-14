@@ -1,8 +1,8 @@
-using System.Linq;
 using RecipeApp.Domain.Entities;
 using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Exceptions;
 using RecipeApp.Infrastructure.Repositories.Interfaces;
+using RecipeApp.Dto;
 
 namespace RecipeApp.DomainService.Classes;
 
@@ -18,9 +18,14 @@ public class StepService : IStepService
     public Task<List<Step>> GetAllAsync()
         => _stepRepository.GetAllAsync();
 
-    public async Task<Step> AddAsync(Step step)
+    public async Task<Step> AddAsync(StepDto stepDto)
     {
-        return await _stepRepository.AddAsync(step);
+        var newStep = new Step
+        {
+            RecipeId = stepDto.RecipeId,
+            Description = stepDto.Description,
+        };
+        return await _stepRepository.AddAsync(newStep);
     }
 
     public async Task DeleteAsync(int id)
