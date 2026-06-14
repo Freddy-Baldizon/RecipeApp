@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using RecipeApp.Domain.Entities;
 
-namespace RecipeApp.Infrastructure.Repositories
+namespace RecipeApp.Infrastructure.Repositories.Interfaces
 {
     public interface IStepRepository
     {

@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using RecipeApp.Domain.Entities;
- 
-namespace RecipeApp.Infrastructure.Repositories
+using RecipeApp.Infrastructure.Repositories.Interfaces;
+
+namespace RecipeApp.Infrastructure.Repositories.Classes
 {
     public class IngredientRepository : IIngredientRepository
     {

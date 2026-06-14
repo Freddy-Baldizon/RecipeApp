@@ -1,9 +1,10 @@
 using RecipeApp.Domain.Entities;
-using RecipeApp.Infrastructure.Repositories;
 using RecipeApp.Exceptions;
 using RecipeApp.Dto;
+using RecipeApp.Infrastructure.Repositories.Interfaces;
+using RecipeApp.DomainService.Interfaces;
 
-namespace RecipeApp.DomainService;
+namespace RecipeApp.DomainService.Classes;
 
 public class RecipeCommentService : ICommentService
 {

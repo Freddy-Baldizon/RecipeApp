@@ -1,9 +1,10 @@
 using RecipeApp.Domain.Entities;
+using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Dto;
 using RecipeApp.Exceptions;
 using RecipeApp.Infrastructure.Repositories;
 
-namespace RecipeApp.DomainService;
+namespace RecipeApp.DomainService.Classes;
 
 public class UserService : IUserService
 {

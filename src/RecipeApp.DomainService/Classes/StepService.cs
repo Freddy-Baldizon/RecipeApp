@@ -1,9 +1,10 @@
 using System.Linq;
 using RecipeApp.Domain.Entities;
+using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Exceptions;
-using RecipeApp.Infrastructure.Repositories;
+using RecipeApp.Infrastructure.Repositories.Interfaces;
 
-namespace RecipeApp.DomainService;
+namespace RecipeApp.DomainService.Classes;
 
 public class StepService : IStepService
 {

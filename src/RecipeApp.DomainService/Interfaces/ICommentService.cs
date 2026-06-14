@@ -1,7 +1,7 @@
 using RecipeApp.Domain.Entities;
 using RecipeApp.Dto;
 
-namespace RecipeApp.DomainService
+namespace RecipeApp.DomainService.Interfaces
 {
     public interface ICommentService
     {
