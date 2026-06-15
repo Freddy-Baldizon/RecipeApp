@@ -9,8 +9,14 @@ namespace RecipeApp.Api.Controllers;
 public class UserController(IUserFacade userFacade): ControllerBase
 {
     [HttpPost]
-    public async Task<User> createUserAsync([FromBody] CreateUserRequestModel createUser)
+    public async Task<IActionResult> createUserAsync([FromBody] CreateUserRequestModel createUser)
     {
-        
+        throw new NotImplementedException();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> getAllAsync()
+    {
+        throw new NotImplementedException();
     }
 }
