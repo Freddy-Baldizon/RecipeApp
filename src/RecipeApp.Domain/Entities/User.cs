@@ -38,6 +38,6 @@ public class User
     public List<Recipe> Recipes { get; set; } = [];
    
     public List<Comment> Comments { get; set; } = [];
-    public List<Rating> Ratings { get; set; } = [];
+
     public List<Favorite> Favorites { get; set; } = [];
 }
