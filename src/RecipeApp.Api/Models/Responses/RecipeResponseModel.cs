@@ -12,4 +12,7 @@ public class RecipeResponseModel
     public string? Username { get; set; }
     public string? PhotoUrl { get; set; }
     public double AverageRating { get; set; }
+    public List<StepResponseModel> Steps { get; set; } = new();
+    public List<IngredientResponseModel> Ingredients { get; set; } = new();
+    public List<CommentResponseModel> Comments { get; set; } = new();
 }
