@@ -7,9 +7,8 @@ namespace RecipeApp.Facade.Interfaces
     {
         Task<CommentDto> AddAsync(CommentDto commentDto);
         Task<CommentDto> GetByIdAsync(int id);
-        Task<List<CommentDto>> GetAllByRecipeIdAsync(int recipeId);
         Task DeleteAsync(int id);
-
-        Task UpdateAsync(int id, CommentDto commentDto);
+        Task<CommentDto> UpdateAsync(CommentDto commentDto);
+        Task<List<CommentDto>> GetAllByRecipeIdAsync(int recipeId);
     }
 }
