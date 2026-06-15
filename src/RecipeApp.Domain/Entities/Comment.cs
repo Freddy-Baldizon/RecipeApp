@@ -22,6 +22,11 @@ public class Comment
     public int RecipeId { get; set; }
 
     [MaxLength(255)]
+    [Required]
+    [Column("username")]
+    public string? Username {get; set;}
+
+    [MaxLength(255)]
     [Column("title")]
     public string? Title { get; set; }
 
