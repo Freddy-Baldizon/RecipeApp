@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-
 namespace RecipeApp.Dto;
 
 public class FavoriteDto
