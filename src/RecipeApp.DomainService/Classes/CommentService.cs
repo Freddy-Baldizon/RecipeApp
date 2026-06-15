@@ -22,6 +22,7 @@ public class CommentService : ICommentService
             UserId = commentDto.UserId,
             RecipeId = commentDto.RecipeId,
             Title = commentDto.Title,
+            Username = commentDto.Username,
             Description = commentDto.Description
         };
         return _commentRepository.AddAsync(comment);
@@ -59,8 +60,8 @@ public class CommentService : ICommentService
         return await _commentRepository.UpdateAsync(comment);
     }
 
-    public Task<List<Comment>> GetAllAsync()
+    public async Task<List<Comment>> GetAllByRecipeIdAsync(int recipeId)
     {
-        throw new NotImplementedException();
+        return await _commentRepository.GetAllByRecipeIdAsync(recipeId);
     }
 }

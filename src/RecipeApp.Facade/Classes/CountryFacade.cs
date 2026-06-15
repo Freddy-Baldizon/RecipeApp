@@ -22,8 +22,8 @@ public class CountryFacade : ICountryFacade
 
     public async Task<List<CountryDto>> GetAllAsync()
     {
-        var entities = await countryService.GetAllAsync();
-        return CountryMapper.ToDto(entities);
+        var countries = await countryService.GetAllAsync();
+        return CountryMapper.ToDto(countries);
     }
 
     public async Task<CountryDto?> GetByIdAsync(int countryId)

@@ -25,6 +25,7 @@ CREATE TABLE [Comments] (
   [id] int IDENTITY(1,1) PRIMARY KEY,
   [user_id] int,
   [recipe_id] int,
+  [username] nvarchar(255) not null,
   [title] nvarchar(255),
   [description] nvarchar(255)
 )
