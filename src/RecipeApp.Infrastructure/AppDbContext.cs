@@ -10,11 +10,9 @@ public class AppDbContext : DbContext
     public DbSet<Comment> Comment { get; set; }
     public DbSet<Country> Country { get; set; }
     public DbSet<Ingredient> Ingredient { get; set; }
-    public DbSet<Rating> Rating { get; set; }
     public DbSet<Recipe> Recipe { get; set; }
     public DbSet<Favorite> Favorite { get; set; }
     public DbSet<RecipeIngredient> RecipeIngredient { get; set; }
-    public DbSet<Step> Step { get; set; }
     public DbSet<User> User { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -131,55 +129,6 @@ public class AppDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
-        modelBuilder.Entity<Rating>(entity =>
-        {
-            entity.ToTable("Ratings");
-
-            entity.HasKey(e => e.Id);
-
-            entity.Property(e => e.Value)
-                .IsRequired();
-
-            entity.HasIndex(e => e.RecipeId);
-
-            entity.HasIndex(e => new { e.UserId, e.RecipeId })
-                .IsUnique();
-
-            entity.HasOne(e => e.User)
-                .WithMany(u => u.Ratings)
-                .HasForeignKey(e => e.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            entity.HasOne(e => e.Recipe)
-                .WithMany(r => r.Ratings)
-                .HasForeignKey(e => e.RecipeId)
-                .OnDelete(DeleteBehavior.Cascade);
-        });
-
-        modelBuilder.Entity<Step>(entity =>
-        {
-            entity.ToTable("Steps");
-
-            entity.HasKey(e => e.Id);
-
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(200);
-
-            entity.Property(e => e.Description)
-                .HasMaxLength(4000);
-
-            entity.Property(e => e.Order)
-                .IsRequired();
-
-            entity.HasIndex(e => e.RecipeId);
-
-            entity.HasOne(e => e.Recipe)
-                .WithMany(r => r.Steps)
-                .HasForeignKey(e => e.RecipeId)
-                .OnDelete(DeleteBehavior.Cascade);
-        });
-
         modelBuilder.Entity<Ingredient>(entity =>
         {
             entity.ToTable("Ingredients");
@@ -241,5 +190,4 @@ public class AppDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
     }
-
 }
