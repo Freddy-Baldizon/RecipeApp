@@ -1,13 +1,14 @@
+using RecipeApp.Domain.Entities;
 using RecipeApp.Dto;
 namespace RecipeApp.Facade.Mappers
 {
     public class CommentMapper
     {
-        public static List<CommentDto> ToDto(List<CommentDto> comments)
+        public static List<CommentDto> ToDto(List<Comment> comments)
         {
             return comments.Select(p => ToDto(p)).ToList();
         }
-        public static CommentDto ToDto(CommentDto comment)
+        public static CommentDto ToDto(Comment comment)
         {
             return new CommentDto
             {
