@@ -8,6 +8,7 @@ namespace RecipeApp.DomainService.Interfaces
         Task<Comment> AddAsync(CommentDto commentDto);
         Task<Comment> GetByIdAsync(int id);
         Task<List<Comment>> GetAllByRecipeIdAsync(int recipeId);
+        Task<Comment> UpdateAsync(CommentDto commentDto);
         Task DeleteAsync(int id);
     }
 }

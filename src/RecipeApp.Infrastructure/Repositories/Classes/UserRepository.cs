@@ -53,4 +53,11 @@ public class UserRepository : IUserRepository
             .Include(u => u.Recipes)
             .FirstOrDefaultAsync(u => u.Username == username);
     }
+
+    public async Task<User> UpdateAsync(User user)
+    {
+        _dbContext.User.Update(user);
+        await _dbContext.SaveChangesAsync();
+        return user;
+    }
 }

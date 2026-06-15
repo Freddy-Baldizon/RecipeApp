@@ -9,7 +9,7 @@ namespace RecipeApp.Infrastructure.Repositories.Interfaces
     {
         Task<List<Step>> GetAllAsync();
         Task<Step> AddAsync(Step step);
-
+        Task<Step> UpdateAsync(Step step);
         Task DeleteAsync(Step step);
     }
 }

@@ -10,5 +10,6 @@ namespace RecipeApp.DomainService.Interfaces
         Task DeleteAsync(RatingDto rating);
         Task<List<Rating>> GetRatingByUserId(int userId);
         Task<List<Rating>> GetRatingByRecipeId(int recipeId);
+         Task<Rating> UpdateAsync(RatingDto rating);
     }
 }

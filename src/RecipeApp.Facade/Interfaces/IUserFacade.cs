@@ -10,5 +10,7 @@ namespace RecipeApp.Facade.Interfaces
         Task<UserDto?> GetByEmailAsync(String email);
         Task<UserDto?> GetByUsername(String username);
         Task DeleteAsync(int userId);
+
+        Task UpdateAsync(int id, UserDto userDto);
     }
 }

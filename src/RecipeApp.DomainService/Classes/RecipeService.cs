@@ -1,10 +1,9 @@
 using RecipeApp.Domain.Entities;
-using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Dto;
 using RecipeApp.Exceptions;
-using RecipeApp.Infrastructure.Repositories.Interfaces;
+using RecipeApp.Infrastructure.Repositories;
 
-namespace RecipeApp.DomainService.Classes;
+namespace RecipeApp.DomainService;
 
 public class RecipeService : IRecipeService
 {
@@ -17,6 +16,9 @@ public class RecipeService : IRecipeService
 
     public Task<List<Recipe>> GetAllAsync()
         => _recipeRepository.GetAllAsync();
+
+    public Task<Recipe?> GetByIdAsync(int id)
+        => _recipeRepository.GetByIdAsync(id);
 
     public async Task<Recipe> AddAsync(CreateRecipeDto recipeDto)
     {
@@ -35,14 +37,31 @@ public class RecipeService : IRecipeService
     public Task<Recipe?> GetByRecipenameAsync(string recipeName)
         => _recipeRepository.GetByRecipename(recipeName);
 
-    public async Task DeleteAsync(string recipeName)
+    public async Task DeleteAsync(int id)
     {
-        var recipe = await _recipeRepository.GetByRecipename(recipeName);
+        var recipe = await _recipeRepository.GetByIdAsync(id);
         if (recipe == null)
         {
-            throw new ResourceNotFoundException($"Recipe with name '{recipeName}' not found.");
+            throw new ResourceNotFoundException($"Recipe with ID {id} not found.");
         }
 
         await _recipeRepository.DeleteAsync(recipe);
     }
+
+    public async Task<Recipe> UpdateAsync(int id, UpdateRecipeDto recipeDto)
+    {
+        var recipe = await _recipeRepository.GetByIdAsync(id);
+        if (recipe == null)
+        {
+            throw new ResourceNotFoundException($"Recipe with ID {id} not found.");
+        }
+
+        recipe.Name = recipeDto.Name ?? recipe.Name;
+        recipe.Description = recipeDto.Description ?? recipe.Description;
+        recipe.CountryId = recipeDto.CountryId.HasValue ? recipeDto.CountryId.Value : recipe.CountryId;
+        recipe.PhotoUrl = recipeDto.PhotoUrl ?? recipe.PhotoUrl;
+
+        return await _recipeRepository.UpdateAsync(recipe);
+    }
 }
+

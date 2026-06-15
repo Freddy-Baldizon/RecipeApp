@@ -10,5 +10,7 @@ namespace RecipeApp.Facade.Interfaces
         Task DeleteAsync(int id);
         Task<List<RatingDto>> GetRatingByUserId(int userId);
         Task<List<RatingDto>> GetRatingByRecipeId(int recipeId);
+
+        Task UpdateAsync(int id, RatingDto ratingDto);
     }
 }
