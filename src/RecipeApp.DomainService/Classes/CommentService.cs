@@ -37,11 +37,6 @@ public class CommentService : ICommentService
         return comment;
     }
 
-    public async Task<List<Comment>> GetAllByRecipeIdAsync(int recipeId)
-    {
-        return await _commentRepository.GetAllByRecipeIdAsync(recipeId);
-    }
-
     public async Task DeleteAsync(int commentId)
     {
         var comment = await _commentRepository.GetByIdAsync(commentId);
@@ -62,5 +57,10 @@ public class CommentService : ICommentService
         comment.Description = commentDto.Description;
 
         return await _commentRepository.UpdateAsync(comment);
+    }
+
+    public Task<List<Comment>> GetAllAsync()
+    {
+        throw new NotImplementedException();
     }
 }
