@@ -22,6 +22,7 @@ public class CommentService : ICommentService
             UserId = commentDto.UserId,
             RecipeId = commentDto.RecipeId,
             Title = commentDto.Title,
+            Username = commentDto.Username,
             Description = commentDto.Description
         };
         return _commentRepository.AddAsync(comment);
