@@ -42,5 +42,10 @@ namespace RecipeApp.Infrastructure.Repositories.Classes
                 await _dbContext.SaveChangesAsync();
             
         }
+
+        public async Task<Ingredient> GetByIdAsync(int id)
+        {
+            return await _dbContext.Ingredient.FirstOrDefaultAsync(i => i.Id == id);
+        }
     }
 }

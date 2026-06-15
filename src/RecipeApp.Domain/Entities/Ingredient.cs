@@ -18,6 +18,8 @@ public class Ingredient
     [MaxLength(255)]
     [Required]
     [Column("name")]
+
+    
     public required string Name { get; set; }
     public List<RecipeIngredient> RecipeIngredients { get; set; } = [];
 }

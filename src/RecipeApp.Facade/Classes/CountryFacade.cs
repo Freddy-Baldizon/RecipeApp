@@ -1,15 +1,10 @@
-using System;
-using System.Linq.Expressions;
-using System.Net.Mime;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Update;
 using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Dto;
 using RecipeApp.Exceptions;
 using RecipeApp.Facade.Interfaces;
 using RecipeApp.Facade.Mappers;
 
-namespace StoreBackend.Facade;
+namespace RecipeApp.Facade;
 
 public class CountryFacade : ICountryFacade
 {

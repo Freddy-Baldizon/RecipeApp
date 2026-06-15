@@ -8,7 +8,8 @@ namespace RecipeApp.DomainService.Interfaces
         Task<Ingredient> AddAsync(IngredientDto ingredientDto);
         Task<List<Ingredient>> GetAllAsync();
         Task<Ingredient> GetByNameAsync(string name);
+        Task<Ingredient> GetByIdAsync(int id);
         Task UpdateAsync(int id, IngredientDto ingredientDto);
-        Task DeleteAsync(string name);
+        Task DeleteAsync(int id);
     }
 }

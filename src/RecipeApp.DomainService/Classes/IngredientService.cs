@@ -63,13 +63,23 @@ public class IngredientService : IIngredientService
         await _ingredientRepository.UpdateAsync(ingredientToUpdate);
     }
 
-    public async Task DeleteAsync(string name)
+    public async Task DeleteAsync(int id)
     {
-        var ingredient = await _ingredientRepository.GetByNameAsync(name);
+        var ingredient = await _ingredientRepository.GetByIdAsync(id);
         if (ingredient == null)
         {
-            throw new ResourceNotFoundException($"Ingredient with name '{name}' not found.");
+            throw new ResourceNotFoundException($"Ingredient with name '{id}' not found.");
         }
         await _ingredientRepository.DeleteAsync(ingredient);
+    }
+
+    public async Task<Ingredient> GetByIdAsync(int id)
+    {
+        var ingredient = await _ingredientRepository.GetByIdAsync(id);
+        if (ingredient == null)
+        {
+            throw new ResourceNotFoundException($"Ingredient with name '{id}' not found.");
+        }
+        return ingredient;
     }
 }
