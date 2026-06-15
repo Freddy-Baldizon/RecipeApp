@@ -4,11 +4,11 @@ namespace RecipeApp.Facade.Mappers
 {
     public class RecipeMapper
     {
-        public static List<RecipeDto> ToDto(List<RecipeDto> recipes)
+        public static List<RecipeDto> ToDto(List<Recipe> recipes)
         {
             return recipes.Select(p => ToDto(p)).ToList();
         }
-        public static RecipeDto ToDto(RecipeDto recipe)
+        public static RecipeDto ToDto(Recipe recipe)
         {
             return new RecipeDto
             {
@@ -16,10 +16,9 @@ namespace RecipeApp.Facade.Mappers
                 Name = recipe.Name,
                 UserId = recipe.UserId,
                 CountryId = recipe.CountryId,
-                AverageRating = recipe.AverageRating,
-                CountryFlag = recipe.CountryFlag,
-                CountryName = recipe.CountryName,
-                Username = recipe.Username,
+                CountryName = recipe.Country?.Name,   
+                CountryFlag = recipe.Country?.FlagUrl,
+                Username = recipe.User?.Username,
                 Description = recipe.Description,
                 PhotoUrl = recipe.PhotoUrl
             };

@@ -41,13 +41,13 @@ public class Recipe
     [ForeignKey(nameof(UserId))]
     public User User { get; set; } = null!;
 
+    
+
     [ForeignKey(nameof(CountryId))]
     public Country Country { get; set; } = null!;
 
     // Relaciones hijas
     public List<Comment> Comments { get; set; } = [];
-    public List<Rating> Ratings { get; set; } = [];
-    public List<Step> Steps { get; set; } = [];
     public List<RecipeIngredient> RecipeIngredients { get; set; } = [];
     public List<Favorite> Favorites { get; set; } = [];
 }
