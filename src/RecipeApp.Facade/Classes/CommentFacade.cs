@@ -20,29 +20,33 @@ public class CommentFacade : ICommentFacade
 
     public async Task<CommentDto> AddAsync(CommentDto commentDto)
     {
-        var NewComment = await commentService.AddAsync(commentDto);
+        var comment = await commentService.AddAsync(commentDto);
         await context.SaveChangesAsync();
-        return CommentMapper.ToDto(NewComment);
+        return CommentMapper.ToDto(comment);
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteAsync(int commentId)
     {
-        throw new NotImplementedException();
+        await commentService.DeleteAsync(commentId);
+        await context.SaveChangesAsync();
     }
 
-    public Task<List<CommentDto>> GetAllByRecipeIdAsync(int recipeId)
+    public async Task<List<CommentDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var comments = await commentService.GetAllAsync();
+        return CommentMapper.ToDto(comments);
     }
 
-    public Task<CommentDto> GetByIdAsync(int id)
+    public async Task<CommentDto> GetByIdAsync(int commentId)
     {
-        throw new NotImplementedException();
+        var comment = await commentService.GetByIdAsync(commentId);
+        if (comment == null) throw new ResourceNotFoundException();
+        return CommentMapper.ToDto(comment);
     }
 
     public Task UpdateAsync(int id, CommentDto commentDto)
     {
-        throw new NotImplementedException();
+        
     }
 }
 
