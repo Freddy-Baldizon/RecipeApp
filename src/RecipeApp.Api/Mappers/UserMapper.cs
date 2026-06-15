@@ -7,9 +7,9 @@ namespace RecipeApp.Api.Mappers
 {
     public class UserMapper
     {
-        public static User ToDto(CreateUserRequestModel userRequestModel)
+        public static CreateUserDto ToDto(CreateUserRequestModel userRequestModel)
         {
-            return new User
+            return new CreateUserDto
             {
                 Email = userRequestModel.Email,
                 Username = userRequestModel.Username,
@@ -18,12 +18,12 @@ namespace RecipeApp.Api.Mappers
             };
         }
 
-        public static List<UserResponseModel> ToModel(List<User> users)
+        public static List<UserResponseModel> ToModel(List<UserDto> users)
         {
             return users.Select(u => ToModel(u)).ToList();
         }
 
-        public static UserResponseModel ToModel(User user)
+        public static UserResponseModel ToModel(UserDto user)
         {
             return new UserResponseModel
             {
