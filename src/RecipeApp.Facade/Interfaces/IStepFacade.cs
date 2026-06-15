@@ -7,5 +7,7 @@ namespace RecipeApp.Facade.Interfaces
         Task<List<StepDto>> GetAllAsync();
         Task<StepDto> AddAsync(StepDto stepDto);
         Task DeleteAsync(int id);
+
+        Task UpdateAsync(int id, StepDto stepDto);
     }
 }
