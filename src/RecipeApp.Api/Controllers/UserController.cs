@@ -40,16 +40,19 @@ public class UserController(IUserFacade userFacade): ControllerBase
         return Ok(userModel);
     }
 
-    [HttpPut]
-    public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequestModel updateUser)
+    [HttpPut("/{userId}")]
+    public async Task<IActionResult> UpdateUser(string userId,[FromBody] UpdateUserRequestModel model)
     {
-        var updateRequest = UserMapper.ToDto(updateUser);
-        var updatedUser = await userFacade.UpdateAsync(updateRequest);
+        var requestDto = UserMapper.ToDto(model);
+        var updatedUser = await userFacade.UpdateAsync(int.Parse(userId),requestDto);
+        var responseModel = UserMapper.ToModel(updatedUser);
+        return Ok(responseModel);
     }
 
     [HttpDelete("/{userId}")]
     public async Task<IActionResult> DeleteUser(string id)
     {
-        throw new NotImplementedException();
+        await userFacade.DeleteAsync(int.Parse(id));
+        return Ok();
     }
 }
