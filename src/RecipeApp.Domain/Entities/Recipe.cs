@@ -46,8 +46,6 @@ public class Recipe
 
     // Relaciones hijas
     public List<Comment> Comments { get; set; } = [];
-    public List<Rating> Ratings { get; set; } = [];
-    public List<Step> Steps { get; set; } = [];
     public List<RecipeIngredient> RecipeIngredients { get; set; } = [];
     public List<Favorite> Favorites { get; set; } = [];
 }

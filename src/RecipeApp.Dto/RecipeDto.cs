@@ -12,7 +12,6 @@ public class RecipeDto
     public string? Username { get; set; }
     public string? PhotoUrl { get; set; }
     public double AverageRating { get; set; }
-    public List<StepDto?> Steps { get; set; } = [];
     public List<IngredientDto?> Ingredients { get; set; } = [];
     public List<CommentDto?> Comments { get; set; } = [];
 }

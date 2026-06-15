@@ -8,12 +8,11 @@ namespace RecipeApp.Facade;
 public class CommentFacade : ICommentFacade
 {
     private readonly ICommentService commentService;
-
+    
     public CommentFacade(ICommentService commentService)
     {
         this.commentService = commentService;
     }
-
     public async Task<CommentDto> AddAsync(CommentDto commentDto)
     {
         var comment = await commentService.AddAsync(commentDto);
