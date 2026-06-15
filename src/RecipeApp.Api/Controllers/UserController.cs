@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RecipeApp.Api.Mappers;
 using RecipeApp.Api.Models.Requests;
 using RecipeApp.Domain.Entities;
 using RecipeApp.Facade.Interfaces;
@@ -12,25 +13,38 @@ public class UserController(IUserFacade userFacade): ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequestModel createUser)
     {
-        throw new NotImplementedException();
+        var requestDto = UserMapper.ToDto(createUser);
+        var userDto = await userFacade.AddAsync(requestDto);
+        var userModel = UserMapper.ToModel(userDto);
+        return Created("",userModel);
+
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var allUsers = await userFacade.GetAllAsync();
+        var allUsersModel = UserMapper.ToModel(allUsers);
+        return Ok(allUsersModel);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetById()
+    [HttpGet("/{userId}")]
+    public async Task<IActionResult> GetById(string userId)
     {
-        throw new NotImplementedException();
+        var user = await userFacade.GetByIdAsync(int.Parse(userId));
+        if(user == null)
+        {
+            return NotFound("User not found");
+        }
+        var userModel = UserMapper.ToModel(user);
+        return Ok(userModel);
     }
 
     [HttpPut]
     public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequestModel updateUser)
     {
-        throw new NotImplementedException();
+        var updateRequest = UserMapper.ToDto(updateUser);
+        var updatedUser = await userFacade.UpdateAsync(updateRequest);
     }
 
     [HttpDelete("/{userId}")]
