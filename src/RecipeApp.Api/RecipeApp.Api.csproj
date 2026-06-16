@@ -12,11 +12,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RecipeApp.Facade\RecipeApp.Facade.csproj" />
     <ProjectReference Include="..\RecipeApp.Dto\RecipeApp.Dto.csproj" />
+    <ProjectReference Include="..\RecipeApp.Infrastructure\RecipeApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\RecipeApp.DomainService\RecipeApp.DomainService.csproj" />
   </ItemGroup>
 
 </Project>
