@@ -19,31 +19,37 @@ public class RecipeFacade : IRecipeFacade
     public async Task<RecipeDto> AddAsync(CreateRecipeDto recipeDto)
     {
         var recipe = await recipeService.AddAsync(recipeDto);
+        return RecipeMapper.ToDto(recipe);    
+    }
+
+    public async Task DeleteAsync(int recipeid)
+    {
+        await recipeService.DeleteAsync(recipeid);
+    }
+
+    public async Task<List<RecipeDto>> GetAllByRecipeIdAsync(int recipeId)
+    {
+        var recipe = await recipeService.GetAllAsync();
         return RecipeMapper.ToDto(recipe);
     }
 
-    public async Task DeleteAsync(int commentId)
+    public async Task<RecipeDto> GetByIdAsync(int id)
     {
-        await commentService.DeleteAsync(commentId);
+        var recipe = await recipeService.GetByIdAsync(id);
+        if (recipe == null) throw new ResourceNotFoundException();
+        return RecipeMapper.ToDto(recipe);     
     }
 
-    public async Task<List<CommentDto>> GetAllByRecipeIdAsync(int recipeId)
+    public async Task<RecipeDto?> GetByRecipeNameAsync(string recipeName)
     {
-        var comments = await commentService.GetAllByRecipeIdAsync(recipeId);
-        return CommentMapper.ToDto(comments);
+        var recipe = await recipeService.GetByRecipeNameAsync(recipeName);
+        if (recipe == null) throw new ResourceNotFoundException();
+        return RecipeMapper.ToDto(recipe);    
     }
 
-    public async Task<CommentDto> GetByIdAsync(int commentId)
+    public async Task<RecipeDto> UpdateAsync(int id, UpdateRecipeDto recipeDto)
     {
-        var comment = await commentService.GetByIdAsync(commentId);
-        if (comment == null) throw new ResourceNotFoundException();
-        return CommentMapper.ToDto(comment);
+        var upDateRecipe = await recipeService.UpdateAsync(id, recipeDto);
+        return RecipeMapper.ToDto(upDateRecipe);
     }
-    public async Task<CommentDto> UpdateAsync(CommentDto commentDto)
-    {
-        var updatedComment = await commentService.UpdateAsync(commentDto);
-        return CommentMapper.ToDto(updatedComment);
-    }
-
-    
 }
