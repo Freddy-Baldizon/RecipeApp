@@ -7,12 +7,12 @@ namespace RecipeApp.Api.Mappers
 {
     public static class FavoriteMapper
     {
-        public static CreateFavoriteDto toDto(CreateFavoriteRequestModel request)
+        public static FavoriteDto ToDto(CreateFavoriteRequestModel request)
         {
-            var dto = new CreateFavoriteDto
+            var dto = new FavoriteDto
             {
-                userId = request.UserId,
-                recipId = request.RecipeId
+                UserId = request.UserId,
+                RecipeId = request.RecipeId
             };
 
             return dto;

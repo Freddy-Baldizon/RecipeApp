@@ -21,10 +21,10 @@ public class FavoriteController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateFavoriteAsync([FromBody] CreateFavoriteRequestModel request)
     {
-        var requestDto =  FavoriteMapper.toDto(request);
+        var dto =  FavoriteMapper.ToDto(request);
         
 
-        var createdFavorite = await favoriteFacade.AddAsync(requestDto);
+        var createdFavorite = await favoriteFacade.AddAsync(dto);
         return Created(string.Empty, createdFavorite);
     }
 

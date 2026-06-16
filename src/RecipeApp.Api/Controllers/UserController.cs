@@ -13,8 +13,8 @@ public class UserController(IUserFacade userFacade): ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequestModel createUser)
     {
-        var requestDto = UserMapper.ToDto(createUser);
-        var userDto = await userFacade.AddAsync(requestDto);
+        var dto = UserMapper.ToDto(createUser);
+        var userDto = await userFacade.AddAsync(dto);
         var userModel = UserMapper.ToModel(userDto);
         return Created("",userModel);
 
