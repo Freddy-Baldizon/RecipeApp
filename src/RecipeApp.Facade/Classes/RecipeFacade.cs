@@ -19,29 +19,36 @@ public class RecipeFacade : IRecipeFacade
     public async Task<RecipeDto> AddAsync(CreateRecipeDto recipeDto)
     {
         var recipe = await recipeService.AddAsync(recipeDto);
-        return RecipeMapper.ToDto(recipe);
+        return RecipeMapper.ToDto(recipe);    
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(int recipeid)
     {
-        await recipeService.DeleteAsync(id);
+        await recipeService.DeleteAsync(recipeid);
     }
 
     public async Task<List<RecipeDto>> GetAllAsync()
     {
-        var recipes = await recipeService.GetAllAsync();
-        return RecipeMapper.ToDto(recipes);
-    }
-
-    public async Task<RecipeDto?> GetByRecipenameAsync(int id)
-    {
-        var recipe = await recipeService.GetByIdAsync(id);
-        if (recipe == null) throw new ResourceNotFoundException();
+        var recipe = await recipeService.GetAllAsync();
         return RecipeMapper.ToDto(recipe);
     }
 
-    public Task UpdateAsync(int id, RecipeDto recipeDto)
+    public async Task<RecipeDto> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var recipe = await recipeService.GetByIdAsync(id);
+        if (recipe == null) throw new ResourceNotFoundException();
+        return RecipeMapper.ToDto(recipe);     
+    }
+
+    public async Task<RecipeDto?> GetByRecipenameAsync(string recipeName)
+    {
+        var recipe = await recipeService.GetByRecipeNameAsync(recipeName);
+        if (recipe == null) throw new ResourceNotFoundException();
+        return RecipeMapper.ToDto(recipe);    
+    }
+
+    public async Task UpdateAsync(int id, UpdateRecipeDto recipeDto)
+    {
+        await recipeService.UpdateAsync(id, recipeDto);
     }
 }
