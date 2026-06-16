@@ -9,6 +9,6 @@ namespace RecipeApp.Facade.Interfaces
         Task<RecipeDto> GetByIdAsync(int id);
         Task<RecipeDto?> GetByRecipenameAsync(string recipeName);
         Task DeleteAsync(int id);
-        Task UpdateAsync(int id, UpdateRecipeDto recipeDto);
+        Task<RecipeDto> UpdateAsync(int id, UpdateRecipeDto recipeDto);
     }
 }

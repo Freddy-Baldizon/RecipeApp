@@ -6,9 +6,9 @@ namespace RecipeApp.Api.Mappers
 {
     public class RecipeMapper
     {
-        public static RecipeDto ToDto(CreateRecipeRequestModel recipeRequestModel)
+        public static CreateRecipeDto ToDto(CreateRecipeRequestModel recipeRequestModel)
         {
-            return new RecipeDto
+            return new CreateRecipeDto
             {
                 Name = recipeRequestModel.Name,
                 Description = recipeRequestModel.Description,

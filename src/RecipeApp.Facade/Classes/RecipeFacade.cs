@@ -27,6 +27,11 @@ public class RecipeFacade : IRecipeFacade
         await recipeService.DeleteAsync(recipeid);
     }
 
+    public Task<List<RecipeDto>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<RecipeDto>> GetAllByRecipeIdAsync(int recipeId)
     {
         var recipe = await recipeService.GetAllAsync();
@@ -40,12 +45,13 @@ public class RecipeFacade : IRecipeFacade
         return RecipeMapper.ToDto(recipe);     
     }
 
-    public async Task<RecipeDto?> GetByRecipeNameAsync(string recipeName)
+    public async Task<RecipeDto?> GetByRecipenameAsync(string recipeName)
     {
         var recipe = await recipeService.GetByRecipeNameAsync(recipeName);
         if (recipe == null) throw new ResourceNotFoundException();
         return RecipeMapper.ToDto(recipe);    
     }
+
 
     public async Task<RecipeDto> UpdateAsync(int id, UpdateRecipeDto recipeDto)
     {
