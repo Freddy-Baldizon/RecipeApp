@@ -27,6 +27,15 @@ public class RecipeFacade : IRecipeFacade
         await recipeService.DeleteAsync(recipeid);
     }
 
+<<<<<<< HEAD
+=======
+    public async Task<List<RecipeDto>> GetAllAsync()
+    {
+        var recipes = await recipeService.GetAllAsync();
+        return RecipeMapper.ToDto(recipes);
+    }
+
+>>>>>>> 74f57374ac1f09afdd09e31122f7dee427def775
     public async Task<List<RecipeDto>> GetAllByRecipeIdAsync(int recipeId)
     {
         var recipe = await recipeService.GetAllAsync();

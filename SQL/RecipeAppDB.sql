@@ -1,142 +1,137 @@
 CREATE DATABASE RecipeApp;
 GO
 USE RecipeApp;
+GO
 
 CREATE TABLE [Users] (
   [id] int IDENTITY(1,1) PRIMARY KEY,
-  [email] nvarchar(255) UNIQUE,
-  [username] nvarchar(255) UNIQUE,
-  [password] nvarchar(255),
-  [avatar] nvarchar(255)
-)
-GO
-
-CREATE TABLE [Recipes] (
-  [id] int IDENTITY(1,1) PRIMARY KEY,
-  [name] nvarchar(255),
-  [description] nvarchar(255),
-  [country_id] int,
-  [user_id] int,
-  [photo_url] nvarchar(255)
-)
-GO
-
-CREATE TABLE [Comments] (
-  [id] int IDENTITY(1,1) PRIMARY KEY,
-  [user_id] int,
-  [recipe_id] int,
-  [username] nvarchar(255) not null,
-  [title] nvarchar(255),
-  [description] nvarchar(255)
-)
-GO
-
-CREATE TABLE [Ratings] (
-  [id] int IDENTITY(1,1) PRIMARY KEY,
-  [recipe_id] int,
-  [user_id] int,
-  [value] int
-)
-GO
-
-CREATE TABLE [Steps] (
-  [id] int IDENTITY(1,1) PRIMARY KEY,
-  [recipe_id] int,
-  [name] nvarchar(255),
-  [description] nvarchar(255),
-  [order] int
-)
-GO
-
-CREATE TABLE [Ingredients] (
-  [id] int IDENTITY(1,1) PRIMARY KEY,
-  [name] nvarchar(255) UNIQUE
-)
-GO
-
-CREATE TABLE [RecipeIngredients] (
-  [id] int IDENTITY(1,1) PRIMARY KEY,
-  [recipe_id] int,
-  [ingredient_id] int,
-  [amount] nvarchar(255)
-)
+  [email] nvarchar(255) NOT NULL,
+  [username] nvarchar(100) NOT NULL,
+  [password] nvarchar(255) NULL,
+  [avatar] nvarchar(500) NULL
+);
 GO
 
 CREATE TABLE [Countries] (
   [id] int IDENTITY(1,1) PRIMARY KEY,
-  [name] nvarchar(255) UNIQUE,
-  [flag_url] nvarchar(255),
-  [iso_alpha3] nvarchar(255) UNIQUE
-)
+  [name] nvarchar(100) NOT NULL,
+  [flag_url] nvarchar(500) NULL,
+  [iso_alpha3] nvarchar(3) NOT NULL
+);
 GO
 
-CREATE TABLE [RecipeFavorites] (
+CREATE TABLE [Ingredients] (
+  [id] int IDENTITY(1,1) PRIMARY KEY,
+  [name] nvarchar(200) NOT NULL
+);
+GO
+
+CREATE TABLE [Recipes] (
+  [id] int IDENTITY(1,1) PRIMARY KEY,
+  [name] nvarchar(200) NOT NULL,
+  [description] nvarchar(2000) NULL,
+  [country_id] int NOT NULL,
+  [user_id] int NOT NULL,
+  [photo_url] nvarchar(500) NULL
+);
+GO
+
+CREATE TABLE [Comments] (
+  [id] int IDENTITY(1,1) PRIMARY KEY,
+  [user_id] int NOT NULL,
   [recipe_id] int NOT NULL,
-  [user_id]   int NOT NULL,
-  [created_at] date,
-  CONSTRAINT PK_RecipeFavorites PRIMARY KEY ([user_id], [recipe_id])
-)
+  [username] nvarchar(255) NOT NULL,
+  [title] nvarchar(200) NULL,
+  [description] nvarchar(2000) NULL
+);
 GO
 
-CREATE INDEX [Recipes_index_0] ON [Recipes] ("user_id")
+CREATE TABLE [RecipeIngredients] (
+  [id] int IDENTITY(1,1) PRIMARY KEY,
+  [recipe_id] int NOT NULL,
+  [ingredient_id] int NOT NULL,
+  [amount] nvarchar(100) NULL
+);
 GO
 
-CREATE INDEX [Recipes_index_1] ON [Recipes] ("country_id")
+CREATE TABLE [Favorites] (
+  [user_id] int NOT NULL,
+  [recipe_id] int NOT NULL,
+  [created_at] date NULL,
+  CONSTRAINT PK_Favorites PRIMARY KEY ([user_id], [recipe_id])
+);
 GO
 
-CREATE INDEX [Recipes_index_2] ON [Recipes] ("name")
+-- Optional tables that exist in original script (no EF entities present currently)
+CREATE TABLE [Ratings] (
+  [id] int IDENTITY(1,1) PRIMARY KEY,
+  [recipe_id] int NULL,
+  [user_id] int NULL,
+  [value] int NULL
+);
 GO
 
-CREATE INDEX [Comments_index_3] ON [Comments] ("recipe_id")
+CREATE TABLE [Steps] (
+  [id] int IDENTITY(1,1) PRIMARY KEY,
+  [recipe_id] int NULL,
+  [name] nvarchar(255) NULL,
+  [description] nvarchar(255) NULL,
+  [order] int NULL
+);
 GO
 
-CREATE INDEX [Ratings_index_4] ON [Ratings] ("recipe_id")
+-- Indexes
+CREATE INDEX [Recipes_index_0] ON [Recipes] ([user_id]);
+GO
+CREATE INDEX [Recipes_index_1] ON [Recipes] ([country_id]);
+GO
+CREATE INDEX [Recipes_index_2] ON [Recipes] ([name]);
 GO
 
-CREATE UNIQUE INDEX [Ratings_index_5] ON [Ratings] ("user_id", "recipe_id")
+CREATE INDEX [Comments_index_3] ON [Comments] ([recipe_id]);
 GO
 
-CREATE INDEX [Steps_index_6] ON [Steps] ("recipe_id")
+CREATE INDEX [Ratings_index_4] ON [Ratings] ([recipe_id]);
+GO
+CREATE UNIQUE INDEX [Ratings_index_5] ON [Ratings] ([user_id], [recipe_id]);
 GO
 
-CREATE INDEX [RecipeIngredients_index_7] ON [RecipeIngredients] ("recipe_id")
+CREATE INDEX [Steps_index_6] ON [Steps] ([recipe_id]);
 GO
 
-CREATE INDEX [RecipeIngredients_index_8] ON [RecipeIngredients] ("ingredient_id")
+CREATE INDEX [RecipeIngredients_index_7] ON [RecipeIngredients] ([recipe_id]);
+GO
+CREATE INDEX [RecipeIngredients_index_8] ON [RecipeIngredients] ([ingredient_id]);
 GO
 
-CREATE UNIQUE INDEX [RecipeFavorites_index_9] ON [RecipeFavorites] ("user_id", "recipe_id")
+CREATE UNIQUE INDEX [Favorites_index_9] ON [Favorites] ([user_id], [recipe_id]);
 GO
 
-ALTER TABLE [Recipes] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id])
+-- Foreign keys
+ALTER TABLE [Recipes] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id]);
+GO
+ALTER TABLE [Recipes] ADD FOREIGN KEY ([country_id]) REFERENCES [Countries] ([id]);
 GO
 
-ALTER TABLE [Recipes] ADD FOREIGN KEY ([country_id]) REFERENCES [Countries] ([id])
+ALTER TABLE [Comments] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id]);
+GO
+ALTER TABLE [Comments] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id]);
 GO
 
-ALTER TABLE [Comments] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id])
+ALTER TABLE [Ratings] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id]);
+GO
+ALTER TABLE [Ratings] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id]);
 GO
 
-ALTER TABLE [Comments] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id])
+ALTER TABLE [Steps] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id]);
 GO
 
-ALTER TABLE [Ratings] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id])
+ALTER TABLE [RecipeIngredients] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id]);
+GO
+ALTER TABLE [RecipeIngredients] ADD FOREIGN KEY ([ingredient_id]) REFERENCES [Ingredients] ([id]);
 GO
 
-ALTER TABLE [Ratings] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id])
+ALTER TABLE [Favorites] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id]);
 GO
-
-ALTER TABLE [Steps] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id])
-GO
-
-ALTER TABLE [RecipeIngredients] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id])
-GO
-
-ALTER TABLE [RecipeIngredients] ADD FOREIGN KEY ([ingredient_id]) REFERENCES [Ingredients] ([id])
-GO
-
-ALTER TABLE [RecipeFavorites] ADD FOREIGN KEY ([recipe_id]) REFERENCES [Recipes] ([id])
-GO
-
-ALTER TABLE [RecipeFavorites] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id])
+ALTER TABLE [Favorites] ADD FOREIGN KEY ([user_id]) REFERENCES [Users] ([id]);
 GO
