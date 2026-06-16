@@ -8,7 +8,7 @@ namespace RecipeApp.Facade.Interfaces
         Task<RecipeDto> AddAsync(CreateRecipeDto recipeDto);
         Task<RecipeDto> GetByIdAsync(int id);
         Task<RecipeDto?> GetByRecipenameAsync(string recipeName);
-        Task DeleteAsync(int  id);
+        Task DeleteAsync(int id);
         Task UpdateAsync(int id, RecipeDto recipeDto);
     }
 }

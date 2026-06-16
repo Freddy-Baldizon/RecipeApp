@@ -3,9 +3,7 @@ using RecipeApp.Dto;
 using RecipeApp.Exceptions;
 using RecipeApp.Facade.Interfaces;
 using RecipeApp.Facade.Mappers;
-using RecipeApp.Infrastructure;
-
-namespace StoreBackend.Facade;
+namespace RecipeApp.Facade;
 
 public class CommentFacade : ICommentFacade
 {
