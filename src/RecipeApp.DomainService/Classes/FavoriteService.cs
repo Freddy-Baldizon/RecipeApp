@@ -20,8 +20,7 @@ public class FavoriteService : IFavoriteService
         var favorite = new Favorite
         {
             RecipeId = favoriteDto.RecipeId,
-            UserId = favoriteDto.UserId,
-            CreatedAt = favoriteDto.CreatedAt
+            UserId = favoriteDto.UserId
         };
         return _favoriteRepository.AddAsync(favorite);
     }
@@ -36,7 +35,7 @@ public class FavoriteService : IFavoriteService
         await _favoriteRepository.DeleteAsync(favorite);
     }
 
-    public Task<List<Favorite>> GetAllByRecipeIdAsync(int recipeId)
+    public Task<List<Favorite>> GetAllByUserIdAsync(int recipeId)
     {
         return _favoriteRepository.GetByUserAsync(recipeId);
     }

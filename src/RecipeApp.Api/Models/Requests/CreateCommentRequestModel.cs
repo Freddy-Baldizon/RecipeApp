@@ -9,6 +9,10 @@ public class CreateCommentRequestModel
 
     [Required]
     public int RecipeId { get; set; }
+    
+    [MaxLength(255)]
+    [Required]
+    public string? Username {get; set;}
 
     [Required]
     [MaxLength(200)]

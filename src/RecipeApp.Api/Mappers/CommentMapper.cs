@@ -12,6 +12,7 @@ namespace RecipeApp.Api.Mappers
             {
                 UserId = commentRequest.UserId,
                 RecipeId = commentRequest.RecipeId,
+                Username = commentRequest.Username,
                 Title = commentRequest.Title,
                 Description = commentRequest.Description,
                 

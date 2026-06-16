@@ -62,24 +62,6 @@ CREATE TABLE [Favorites] (
 );
 GO
 
--- Optional tables that exist in original script (no EF entities present currently)
-CREATE TABLE [Ratings] (
-  [id] int IDENTITY(1,1) PRIMARY KEY,
-  [recipe_id] int NULL,
-  [user_id] int NULL,
-  [value] int NULL
-);
-GO
-
-CREATE TABLE [Steps] (
-  [id] int IDENTITY(1,1) PRIMARY KEY,
-  [recipe_id] int NULL,
-  [name] nvarchar(255) NULL,
-  [description] nvarchar(255) NULL,
-  [order] int NULL
-);
-GO
-
 -- Indexes
 CREATE INDEX [Recipes_index_0] ON [Recipes] ([user_id]);
 GO

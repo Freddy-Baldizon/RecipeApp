@@ -10,12 +10,6 @@ namespace RecipeApp.Domain.Entities;
 [Index(nameof(UserId), nameof(RecipeId), IsUnique = true)]
 public class Favorite
 {
-
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("id")]
-    public int Id { get; set; }
-
     [Required]
     [Column("recipe_id")]
     public int RecipeId { get; set; }
