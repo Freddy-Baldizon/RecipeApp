@@ -6,7 +6,7 @@ namespace RecipeApp.DomainService.Interfaces;
 public interface IUserService
 {
     Task<List<User>> GetAllAsync();
-    Task<User> AddAsync(CreateUserDto userDto);
+    Task<User> AddAsync(UserDto userDto);
     Task<User?> GetByIdAsync(int id);
     Task<User?> GetByEmailAsync(String email);
     Task<User?> GetByUsername(String username);

@@ -14,12 +14,12 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public Task<User> AddAsync(CreateUserDto userDto)
+    public Task<User> AddAsync(UserDto userDto)
     {
         var newUser = new User
         {
-            Email = userDto.Email,
-            Username = userDto.Username,
+            Email = userDto.Email!,
+            Username = userDto.Username!,
             Password = userDto.Password,
             Avatar = userDto.Avatar,
         };

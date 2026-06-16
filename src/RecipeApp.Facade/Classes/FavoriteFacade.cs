@@ -14,9 +14,9 @@ public class FavoriteFacade : IFavoriteFacade
         this.favoriteService = favoriteService;
     }
 
-    public async Task<FavoriteDto> AddAsync(FavoriteDto favoriteDto)
+    public async Task<FavoriteDto> AddAsync(FavoriteDto requestDto)
     {
-        var favorite = await favoriteService.AddAsync(favoriteDto);
+        var favorite = await favoriteService.AddAsync(requestDto);
         return FavoriteMapper.ToDto(favorite);
     }
 

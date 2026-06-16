@@ -13,7 +13,7 @@ public class UserFacade : IUserFacade
         {
             this.userService = userService;
         }
-    public async Task<UserDto> AddAsync(CreateUserDto userDto)
+    public async Task<UserDto> AddAsync(UserDto userDto)
     {
         var user = await userService.AddAsync(userDto);
         return UserMapper.ToDto(user);   

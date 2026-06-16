@@ -15,7 +15,7 @@ public class IngredientFacade : IIngredientFacade
         this.ingredientService = ingredientService;
     }
 
-    public async Task<IngredientDto> AddAsync(CreateIngredientDto createDto)
+    public async Task<IngredientDto> AddAsync(IngredientDto createDto)
     {
         var ingredient = await ingredientService.AddAsync(createDto);
         return IngredientMapper.ToDto(ingredient);

@@ -16,10 +16,10 @@ public class RecipeFacade : IRecipeFacade
     {
         this.recipeService = recipeService;
     }
-    public async Task<RecipeDto> AddAsync(CreateRecipeDto recipeDto)
+    public async Task<RecipeDto> AddAsync(RecipeDto recipeDto)
     {
         var recipe = await recipeService.AddAsync(recipeDto);
-        return RecipeMapper.ToDto(recipe);    
+        return RecipeMapper.ToDto(recipe);
     }
 
     public async Task DeleteAsync(int recipeid)
@@ -27,15 +27,12 @@ public class RecipeFacade : IRecipeFacade
         await recipeService.DeleteAsync(recipeid);
     }
 
-<<<<<<< HEAD
-=======
     public async Task<List<RecipeDto>> GetAllAsync()
     {
         var recipes = await recipeService.GetAllAsync();
         return RecipeMapper.ToDto(recipes);
     }
 
->>>>>>> 74f57374ac1f09afdd09e31122f7dee427def775
     public async Task<List<RecipeDto>> GetAllByRecipeIdAsync(int recipeId)
     {
         var recipe = await recipeService.GetAllAsync();

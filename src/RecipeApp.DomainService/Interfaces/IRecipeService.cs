@@ -8,7 +8,7 @@ public interface IRecipeService
     Task<List<Recipe>> GetAllAsync();
     Task<Recipe?> GetByIdAsync(int recipeId);
     Task<Recipe?> GetByRecipeNameAsync(string recipeName);
-    Task<Recipe> AddAsync(CreateRecipeDto recipeDto);
+    Task<Recipe> AddAsync(RecipeDto recipeDto);
     Task DeleteAsync(int id);
     Task<Recipe> UpdateAsync(int id, UpdateRecipeDto recipeDto);
 }
