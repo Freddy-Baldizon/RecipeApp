@@ -1,9 +1,7 @@
 using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Dto;
-using RecipeApp.Exceptions;
 using RecipeApp.Facade.Interfaces;
 using RecipeApp.Facade.Mappers;
-using RecipeApp.Infrastructure;
 
 namespace StoreBackend.Facade;
 

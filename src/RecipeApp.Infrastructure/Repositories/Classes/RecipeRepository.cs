@@ -14,12 +14,18 @@ public class RecipeRepository : IRecipeRepository
 
     public async Task<List<Recipe>> GetAllAsync()
     {
-        return await _dbContext.Recipe.ToListAsync();
+        return await _dbContext.Recipe
+            .Include(r => r.User)
+            .Include(r => r.Country)
+            .ToListAsync();
     }
 
     public async Task<Recipe?> GetByIdAsync(int id)
     {
-        return await _dbContext.Recipe.FirstOrDefaultAsync(r => r.Id == id);
+        return await _dbContext.Recipe
+            .Include(r => r.User)
+            .Include(r => r.Country)
+            .FirstOrDefaultAsync(r => r.Id == id);
     }
 
     public async Task<Recipe?> GetByRecipename(string recipeName)

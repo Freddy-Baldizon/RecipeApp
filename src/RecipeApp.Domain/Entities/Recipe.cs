@@ -41,6 +41,8 @@ public class Recipe
     [ForeignKey(nameof(UserId))]
     public User User { get; set; } = null!;
 
+    
+
     [ForeignKey(nameof(CountryId))]
     public Country Country { get; set; } = null!;
 

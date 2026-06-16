@@ -48,5 +48,6 @@ public class IngredientFacade : IIngredientFacade
     {
         var ingredient = await ingredientService.GetByIdAsync(id);
         if (ingredient == null) throw new ResourceNotFoundException();
-        return IngredientMapper.ToDto(ingredient);     }
+        return IngredientMapper.ToDto(ingredient);    
+    }
 }
