@@ -31,15 +31,15 @@ builder.Services.AddControllers(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
-var allowedOrigins = builder.Configuration
-    .GetSection("Cors:AllowedOrigins")
-    .Get<string[]>();
+// var allowedOrigins = builder.Configuration
+//     .GetSection("Cors:AllowedOrigins")
+//     .Get<string[]>();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowedOriginsPolicy", policy =>
     {
-        policy.WithOrigins(allowedOrigins!)
+        policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -95,14 +95,14 @@ builder.Services.AddScoped<ICountryFacade, CountryFacade>();
 builder.Services.AddScoped<ICommentFacade, CommentFacade>();
 builder.Services.AddScoped<IAuthorizationFacade, AuthorizationFacade>();
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy(AuthorizationPolicies.CanSearchUsers, policy =>
-       policy.RequireRole(
-           "Administrator",
-           "Support"
-       ));
-});
+// builder.Services.AddAuthorization(options =>
+// {
+//     options.AddPolicy(AuthorizationPolicies.CanSearchUsers, policy =>
+//        policy.RequireRole(
+//            "Administrator",
+//            "Support"
+//        ));
+// });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -124,7 +124,10 @@ builder.Services.AddRateLimiter(options =>
     options.OnRejected = async (context, token) =>
     {
         context.HttpContext.Response.ContentType = "application/json";
-        await context.HttpContext.Response.WriteAsync("""{ "Status": 429, "message": "Demasiadas solicitudes. Intente nuevamente mas tarde.""", cancellationToken: token);
+        await context.HttpContext.Response.WriteAsync(
+"""{"status":429,"message":"Demasiadas solicitudes. Intente nuevamente más tarde."}""",
+cancellationToken: token
+);
     };
 });
 
