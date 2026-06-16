@@ -37,7 +37,6 @@ namespace RecipeApp.Api.Mappers
                 Username = recipeDto.Username,
                 PhotoUrl = recipeDto.PhotoUrl,
                 AverageRating = recipeDto.AverageRating,
-                Steps = recipeDto.Steps.Where(s => s is not null).Select(s => StepMapper.ToModel(s!)).ToList(),
                 Ingredients = recipeDto.Ingredients.Where(i => i is not null).Select(i => IngredientMapper.ToModel(i!)).ToList(),
                 Comments = recipeDto.Comments.Where(c => c is not null).Select(c => CommentMapper.ToModel(c!)).ToList()
             };

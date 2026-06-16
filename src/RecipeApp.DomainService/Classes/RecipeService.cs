@@ -34,7 +34,7 @@ public class RecipeService : IRecipeService
         return await _recipeRepository.AddAsync(recipe);
     }
 
-    public Task<Recipe?> GetByRecipenameAsync(string recipeName)
+    public Task<Recipe?> GetByRecipeNameAsync(string recipeName)
         => _recipeRepository.GetByRecipename(recipeName);
 
     public async Task DeleteAsync(int id)
