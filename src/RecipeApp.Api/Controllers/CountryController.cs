@@ -22,7 +22,7 @@ public class CountryController : ControllerBase
         return Ok(CountryMapper.ToModel(countries));
     }
 
-    [HttpGet("/{countryId}")]
+    [HttpGet("{countryId}")]
     public async Task<IActionResult> GetByIdAsync(string countryId)
     {
         var country = await countryFacade.GetByIdAsync(int.Parse(countryId));

@@ -39,7 +39,7 @@ public class IngredientController : ControllerBase
         return Ok(IngredientMapper.ToModel(ingredientDto));
     }
 
-    [HttpGet("/recipe/{recipeId}")]
+    [HttpGet("recipe/{recipeId}")]
     public async Task<IActionResult> GetAllByRecipeId(string recipeId)
     {
         var ingredientsDto = await ingredientFacade.GetAllByRecipeIdAsync(int.Parse(recipeId));
@@ -51,23 +51,18 @@ public class IngredientController : ControllerBase
         return Ok(IngredientMapper.ToModel(ingredientsDto));
     }
 
-    [HttpDelete("/{ingredientId}")]
+    [HttpDelete("{ingredientId}")]
     public async Task<IActionResult> DeleteIngredient(string ingredientId)
     {
         await ingredientFacade.DeleteAsync(int.Parse(ingredientId));
         return NoContent();
     }
 
-    [HttpPut("/{ingredientId}")]
+    [HttpPut("{ingredientId}")]
     public async Task<IActionResult> UpdateIngredient(string ingredientId, [FromBody] CreateIngredientRequestModel request)
     {
-        var requestDto = new IngredientDto
-        {
-            Id = int.Parse(ingredientId),
-            Name = request.Name
-        };
-
-        await ingredientFacade.UpdateAsync(int.Parse(ingredientId), requestDto);
+        var dto = IngredientMapper.ToDto(request);
+        await ingredientFacade.UpdateAsync(int.Parse(ingredientId), dto);
         return NoContent();
     }
 }

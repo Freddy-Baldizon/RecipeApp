@@ -28,14 +28,14 @@ public class FavoriteController : ControllerBase
         return Created(string.Empty, createdFavorite);
     }
 
-    [HttpGet("/recipe/{recipeId}")]
-    public async Task<IActionResult> GetAllByRecipeId(string recipeId)
+    [HttpGet("recipe/{recipeId}")]
+      public async Task<IActionResult> GetAllByUserId(string userId)
     {
-        var favorites = await favoriteFacade.GetAllByRecipeIdAsync(int.Parse(recipeId));
+        var favorites = await favoriteFacade.GetAllByUserIdAsync(int.Parse(userId));
         return Ok(favorites);
     }
 
-    [HttpDelete("/{favoriteId}")]
+    [HttpDelete("{favoriteId}")]
     public async Task<IActionResult> DeleteFavorite(string favoriteId)
     {
         await favoriteFacade.DeleteAsync(int.Parse(favoriteId));

@@ -25,7 +25,7 @@ public class CommentController : ControllerBase
         return Created(string.Empty, CommentMapper.ToModel(commentDto));
     }
 
-    [HttpGet("/{commentId}")]
+    [HttpGet("{commentId}")]
     public async Task<IActionResult> GetByIdAsync(string commentId)
     {
         var commentDto = await commentFacade.GetByIdAsync(int.Parse(commentId));
@@ -37,14 +37,14 @@ public class CommentController : ControllerBase
         return Ok(CommentMapper.ToModel(commentDto));
     }
 
-    [HttpGet("/recipe/{recipeId}")]
+    [HttpGet("recipe/{recipeId}")]
     public async Task<IActionResult> GetAllByRecipeId(string recipeId)
     {
         var comments = await commentFacade.GetAllByRecipeIdAsync(int.Parse(recipeId));
         return Ok(CommentMapper.ToModel(comments));
     }
 
-    [HttpPut("/{commentId}")]
+    [HttpPut("{commentId}")]
     public async Task<IActionResult> UpdateComment(string commentId, [FromBody] CreateCommentRequestModel request)
     {
         var requestDto = CommentMapper.ToDto(request);
@@ -53,7 +53,7 @@ public class CommentController : ControllerBase
         return Ok(CommentMapper.ToModel(updatedComment));
     }
 
-    [HttpDelete("/{commentId}")]
+    [HttpDelete("{commentId}")]
     public async Task<IActionResult> DeleteComment(string commentId)
     {
         await commentFacade.DeleteAsync(int.Parse(commentId));
