@@ -3,7 +3,7 @@ using RecipeApp.Dto;
 using RecipeApp.Facade.Interfaces;
 using RecipeApp.Facade.Mappers;
 
-namespace StoreBackend.Facade;
+namespace RecipeApp.Facade.Classes;
 
 public class FavoriteFacade : IFavoriteFacade
 {

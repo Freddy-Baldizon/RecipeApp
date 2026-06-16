@@ -16,8 +16,8 @@ namespace RecipeApp.Facade.Mappers
                 Name = recipe.Name,
                 UserId = recipe.UserId,
                 CountryId = recipe.CountryId,
-                CountryName = recipe.Country?.Name,   
                 CountryFlag = recipe.Country?.FlagUrl,
+                CountryName = recipe.Country?.Name,
                 Username = recipe.User?.Username,
                 Description = recipe.Description,
                 PhotoUrl = recipe.PhotoUrl

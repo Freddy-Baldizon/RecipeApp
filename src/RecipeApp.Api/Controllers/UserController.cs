@@ -28,7 +28,7 @@ public class UserController(IUserFacade userFacade): ControllerBase
         return Ok(allUsersModel);
     }
 
-    [HttpGet("/{userId}")]
+    [HttpGet("{userId}")]
     public async Task<IActionResult> GetById(string userId)
     {
         var user = await userFacade.GetByIdAsync(int.Parse(userId));
@@ -40,7 +40,7 @@ public class UserController(IUserFacade userFacade): ControllerBase
         return Ok(userModel);
     }
 
-    [HttpPut("/{userId}")]
+    [HttpPut("{userId}")]
     public async Task<IActionResult> UpdateUser(string userId,[FromBody] UpdateUserRequestModel model)
     {
         var requestDto = UserMapper.ToDto(model);
@@ -49,7 +49,7 @@ public class UserController(IUserFacade userFacade): ControllerBase
         return Ok(responseModel);
     }
 
-    [HttpDelete("/{userId}")]
+    [HttpDelete("{userId}")]
     public async Task<IActionResult> DeleteUser(string id)
     {
         await userFacade.DeleteAsync(int.Parse(id));

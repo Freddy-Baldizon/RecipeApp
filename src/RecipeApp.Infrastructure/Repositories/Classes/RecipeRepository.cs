@@ -36,6 +36,7 @@ public class RecipeRepository : IRecipeRepository
     public async Task<Recipe> AddAsync(Recipe recipe)
     {
         await _dbContext.Recipe.AddAsync(recipe);
+        await _dbContext.SaveChangesAsync();
         return recipe;
     }
 

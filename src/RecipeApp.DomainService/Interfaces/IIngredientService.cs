@@ -5,7 +5,7 @@ namespace RecipeApp.DomainService.Interfaces
 {
     public interface IIngredientService
     {
-        Task<Ingredient> AddAsync(IngredientDto ingredientDto);
+        Task<Ingredient> AddAsync(CreateIngredientDto ingredientDto);
         Task<List<Ingredient>> GetAllAsync();
         Task<Ingredient> GetByNameAsync(string name);
         Task<Ingredient> GetByIdAsync(int id);

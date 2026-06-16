@@ -26,6 +26,7 @@ namespace RecipeApp.Infrastructure.Repositories.Classes
         public async Task<Ingredient> AddAsync(Ingredient ingredient)
         {
             await _dbContext.Ingredient.AddAsync(ingredient);
+            await _dbContext.SaveChangesAsync();
             return ingredient;
         }
 

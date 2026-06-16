@@ -5,4 +5,5 @@ public static class AuthorizationPolicies
     public const string CanManageUsers = "CanManageUsers";
     public const string CanManageRecipes = "CanManageRecipes";
     public const string CanManageComments = "CanManageComments";
+    public const string CanSearchUsers = "CanSearchUsers";
 }
