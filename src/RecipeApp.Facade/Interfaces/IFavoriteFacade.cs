@@ -5,7 +5,7 @@ namespace RecipeApp.Facade.Interfaces
     public interface IFavoriteFacade
     {
         Task<FavoriteDto> AddAsync(FavoriteDto favoriteDto);
-        Task<List<FavoriteDto>> GetAllByRecipeIdAsync(int recipeId);
+        Task<List<FavoriteDto>> GetAllByUserIdAsync(int userId);
         Task DeleteAsync(int id);
     }
 }

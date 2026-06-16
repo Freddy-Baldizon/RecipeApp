@@ -7,7 +7,7 @@ namespace RecipeApp.DomainService.Interfaces
     {
         Task<Favorite> AddAsync(FavoriteDto favoriteDto);
         Task<Favorite?> GetByRecipeIdAsync(int id);
-        Task<List<Favorite>> GetAllByRecipeIdAsync(int recipeId);
+        Task<List<Favorite>> GetAllByUserIdAsync(int userId);
         Task DeleteAsync(int id);
     }
 }

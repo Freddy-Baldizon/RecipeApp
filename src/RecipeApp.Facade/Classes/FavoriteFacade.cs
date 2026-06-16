@@ -25,9 +25,9 @@ public class FavoriteFacade : IFavoriteFacade
         await favoriteService.DeleteAsync(favoriteId);
     }
 
-    public async Task<List<FavoriteDto>> GetAllByRecipeIdAsync(int recipeId)
+    public async Task<List<FavoriteDto>> GetAllByUserIdAsync(int userId)
     {
-        var favorites = await favoriteService.GetAllByRecipeIdAsync(recipeId);
+        var favorites = await favoriteService.GetAllByUserIdAsync(userId);
         return FavoriteMapper.ToDto(favorites);
     }
 }
