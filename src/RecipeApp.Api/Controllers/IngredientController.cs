@@ -27,7 +27,7 @@ public class IngredientController : ControllerBase
         return Created(string.Empty, IngredientMapper.ToModel(createdIngredient));
     }
 
-    [HttpGet("/{ingredientId}")]
+    [HttpGet("{ingredientId}")]
     public async Task<IActionResult> GetByIdAsync(string ingredientId)
     {
         var ingredientDto = await ingredientFacade.GetByIdAsync(int.Parse(ingredientId));
