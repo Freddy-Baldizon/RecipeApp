@@ -4,44 +4,46 @@ using RecipeApp.Dto;
 using RecipeApp.Exceptions;
 using RecipeApp.Facade.Interfaces;
 using RecipeApp.Facade.Mappers;
+using RecipeApp.Infrastructure;
 
-namespace RecipeApp.Facade;
+namespace RecipeApp.Facade.Classes;
 
 public class RecipeFacade : IRecipeFacade
 {
     private readonly IRecipeService recipeService;
-
+    
     public RecipeFacade(IRecipeService recipeService)
     {
         this.recipeService = recipeService;
     }
-
     public async Task<RecipeDto> AddAsync(CreateRecipeDto recipeDto)
     {
         var recipe = await recipeService.AddAsync(recipeDto);
         return RecipeMapper.ToDto(recipe);
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(int commentId)
     {
-        await recipeService.DeleteAsync(id);
+        await commentService.DeleteAsync(commentId);
     }
 
-    public async Task<List<RecipeDto>> GetAllAsync()
+    public async Task<List<CommentDto>> GetAllByRecipeIdAsync(int recipeId)
     {
-        var recipes = await recipeService.GetAllAsync();
-        return RecipeMapper.ToDto(recipes);
+        var comments = await commentService.GetAllByRecipeIdAsync(recipeId);
+        return CommentMapper.ToDto(comments);
     }
 
-    public async Task<RecipeDto?> GetByRecipenameAsync(int id)
+    public async Task<CommentDto> GetByIdAsync(int commentId)
     {
-        var recipe = await recipeService.GetByIdAsync(id);
-        if (recipe == null) throw new ResourceNotFoundException();
-        return RecipeMapper.ToDto(recipe);
+        var comment = await commentService.GetByIdAsync(commentId);
+        if (comment == null) throw new ResourceNotFoundException();
+        return CommentMapper.ToDto(comment);
+    }
+    public async Task<CommentDto> UpdateAsync(CommentDto commentDto)
+    {
+        var updatedComment = await commentService.UpdateAsync(commentDto);
+        return CommentMapper.ToDto(updatedComment);
     }
 
-    public Task UpdateAsync(int id, RecipeDto recipeDto)
-    {
-        throw new NotImplementedException();
-    }
+    
 }
