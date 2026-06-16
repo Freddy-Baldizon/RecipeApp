@@ -33,20 +33,17 @@ public class UserFacade : IUserFacade
     public async Task<UserDto?> GetByEmailAsync(string email)
     {
         var user = await userService.GetByEmailAsync(email);
-        if (user == null) throw new ResourceNotFoundException();
         return UserMapper.ToDto(user);  
     }
 
     public async Task<UserDto?> GetByIdAsync(int id)
     {
         var user = await userService.GetByIdAsync(id);
-        if (user == null) throw new ResourceNotFoundException();
         return UserMapper.ToDto(user);    }
 
     public async Task<UserDto?> GetByUsername(string username)
     {
         var user = await userService.GetByUsername(username);
-        if (user == null) throw new ResourceNotFoundException();
         return UserMapper.ToDto(user);  
     }
 

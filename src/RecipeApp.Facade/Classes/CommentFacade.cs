@@ -33,7 +33,6 @@ public class CommentFacade : ICommentFacade
     public async Task<CommentDto> GetByIdAsync(int commentId)
     {
         var comment = await commentService.GetByIdAsync(commentId);
-        if (comment == null) throw new ResourceNotFoundException();
         return CommentMapper.ToDto(comment);
     }
     public async Task<CommentDto> UpdateAsync(CommentDto commentDto)

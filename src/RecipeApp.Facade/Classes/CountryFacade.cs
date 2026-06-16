@@ -24,7 +24,6 @@ public class CountryFacade : ICountryFacade
     public async Task<CountryDto?> GetByIdAsync(int countryId)
     {
         var entity = await countryService.GetByIdAsync(countryId);
-        if (entity == null) throw new ResourceNotFoundException();
         return CountryMapper.ToDto(entity);
     }
 }

@@ -34,7 +34,6 @@ public class IngredientFacade : IIngredientFacade
     public async Task<IngredientDto> GetByNameAsync(string name)
     {
      var ingredient = await ingredientService.GetByNameAsync(name);
-        if (ingredient == null) throw new ResourceNotFoundException();
         return IngredientMapper.ToDto(ingredient); 
     }
 
@@ -47,7 +46,6 @@ public class IngredientFacade : IIngredientFacade
     public async Task<IngredientDto> GetByIdAsync(int id)
     {
         var ingredient = await ingredientService.GetByIdAsync(id);
-        if (ingredient == null) throw new ResourceNotFoundException();
         return IngredientMapper.ToDto(ingredient);    
     }
 }

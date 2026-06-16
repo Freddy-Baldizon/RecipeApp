@@ -42,14 +42,12 @@ public class RecipeFacade : IRecipeFacade
     public async Task<RecipeDto> GetByIdAsync(int id)
     {
         var recipe = await recipeService.GetByIdAsync(id);
-        if (recipe == null) throw new ResourceNotFoundException();
         return RecipeMapper.ToDto(recipe);     
     }
 
     public async Task<RecipeDto?> GetByRecipeNameAsync(string recipeName)
     {
         var recipe = await recipeService.GetByRecipeNameAsync(recipeName);
-        if (recipe == null) throw new ResourceNotFoundException();
         return RecipeMapper.ToDto(recipe);    
     }
 
