@@ -50,9 +50,9 @@ public class UserFacade : IUserFacade
         return UserMapper.ToDto(user);  
     }
 
-    public async Task UpdateAsync(int id, UpdateUserDto userDto)
+    public async Task<UserDto> UpdateAsync(int id, UpdateUserDto userDto)
     {
-        await userService.UpdateAsync(id, userDto);
-        
+        var upDateUser = await userService.UpdateAsync(id, userDto);
+        return UserMapper.ToDto(upDateUser);
     }
 }
