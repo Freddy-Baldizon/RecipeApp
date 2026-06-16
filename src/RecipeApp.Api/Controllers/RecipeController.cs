@@ -12,8 +12,8 @@ public class RecipeController(IRecipeFacade recipeFacade) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateRecipeAsync([FromBody] CreateRecipeRequestModel createRecipe)
     {
-        var requestDto = RecipeMapper.ToDto(createRecipe);
-        var recipeDto = await recipeFacade.AddAsync(requestDto);
+        var dto = RecipeMapper.ToDto(createRecipe);
+        var recipeDto = await recipeFacade.AddAsync(dto);
         var recipeModel = RecipeMapper.ToModel(recipeDto);
         return Created("", recipeModel);
     }

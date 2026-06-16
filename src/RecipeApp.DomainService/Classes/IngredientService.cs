@@ -15,7 +15,7 @@ public class IngredientService : IIngredientService
         _ingredientRepository = ingredientRepository;
     }
 
-    public async Task<Ingredient> AddAsync(CreateIngredientDto ingredientDto)
+    public async Task<Ingredient> AddAsync(IngredientDto ingredientDto)
     {
         var existingIngredient = await _ingredientRepository.GetByNameAsync(ingredientDto.Name!);
         if (existingIngredient != null)

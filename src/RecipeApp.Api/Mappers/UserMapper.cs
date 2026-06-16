@@ -7,9 +7,9 @@ namespace RecipeApp.Api.Mappers
 {
     public class UserMapper
     {
-        public static CreateUserDto ToDto(CreateUserRequestModel userRequestModel)
+        public static UserDto ToDto(CreateUserRequestModel userRequestModel)
         {
-            return new CreateUserDto
+            return new UserDto
             {
                 Email = userRequestModel.Email,
                 Username = userRequestModel.Username,

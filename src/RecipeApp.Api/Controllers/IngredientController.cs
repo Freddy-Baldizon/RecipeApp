@@ -22,8 +22,8 @@ public class IngredientController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateIngredientAsync([FromBody] CreateIngredientRequestModel request)
     {
-        var requestDto = IngredientMapper.toDto(request); 
-        var createdIngredient = await ingredientFacade.AddAsync(requestDto);
+        var dto = IngredientMapper.ToDto(request); 
+        var createdIngredient = await ingredientFacade.AddAsync(dto);
         return Created(string.Empty, IngredientMapper.ToModel(createdIngredient));
     }
 

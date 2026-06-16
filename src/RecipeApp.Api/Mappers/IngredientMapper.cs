@@ -6,9 +6,9 @@ namespace RecipeApp.Api.Mappers
 {
     public static class IngredientMapper
     {
-        public static CreateIngredientDto toDto(CreateIngredientRequestModel request)
+        public static IngredientDto ToDto(CreateIngredientRequestModel request)
         {
-            var dto = new CreateIngredientDto
+            var dto = new IngredientDto
             {
                 Name = request.Name,
             };

@@ -20,7 +20,7 @@ public class RecipeService : IRecipeService
     public Task<Recipe?> GetByIdAsync(int id)
         => _recipeRepository.GetByIdAsync(id);
 
-    public async Task<Recipe> AddAsync(CreateRecipeDto recipeDto)
+    public async Task<Recipe> AddAsync(RecipeDto recipeDto)
     {
         var recipe = new Recipe
         {
