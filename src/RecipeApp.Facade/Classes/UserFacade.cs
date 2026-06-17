@@ -1,8 +1,14 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using RecipeApp.DomainService.Classes;
 using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Dto;
 using RecipeApp.Exceptions;
 using RecipeApp.Facade.Interfaces;
 using RecipeApp.Facade.Mappers;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 namespace RecipeApp.Facade;
 
 public class UserFacade : IUserFacade
@@ -34,6 +40,22 @@ public class UserFacade : IUserFacade
     {
         var user = await userService.GetByEmailAsync(email);
         return UserMapper.ToDto(user);  
+    }
+
+    public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
+    {
+        var user = await userService.GetByEmailAsync(request.Email).ConfigureAwait(false);
+
+        if (user == null || string.IsNullOrEmpty(user.Password) || user.Password != request.Password)
+            throw new UnauthorizedResponseException("Credenciales invalidas");
+
+        return new LoginResponseDto
+        {
+            avatar = user.Avatar,
+            email = user.Email,
+            last_session = DateTime.Now,
+            username = user.Username
+        };
     }
 
     public async Task<UserDto?> GetByIdAsync(int id)

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using RecipeApp.Api.Mappers;
 using RecipeApp.Api.Models.Requests;
 using RecipeApp.Domain.Entities;
+using RecipeApp.Exceptions;
 using RecipeApp.Facade.Interfaces;
 
 namespace RecipeApp.Api.Controllers;
@@ -20,6 +21,24 @@ public class UserController(IUserFacade userFacade): ControllerBase
 
     }
 
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequestModel loginInfo)
+    {
+        var dto = new Dto.LoginRequestDto { Email = loginInfo.Email, Password = loginInfo.Password };
+        
+        try
+        {
+            var response = await userFacade.LoginAsync(dto);
+            return Ok(response);
+        } 
+        catch (UnauthorizedResponseException error)
+        {
+            return Unauthorized(error.Message);
+        }
+
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
@@ -28,7 +47,7 @@ public class UserController(IUserFacade userFacade): ControllerBase
         return Ok(allUsersModel);
     }
 
-    [HttpGet("{userId}")]
+    [HttpGet("{userId:int}")]
     public async Task<IActionResult> GetById(string userId)
     {
         var user = await userFacade.GetByIdAsync(int.Parse(userId));
