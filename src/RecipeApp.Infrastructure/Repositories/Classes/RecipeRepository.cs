@@ -19,6 +19,7 @@ public class RecipeRepository : IRecipeRepository
             .Include(r => r.User)
             .Include(r => r.Country)
             .Include(r=> r.RecipeIngredients)
+            .ThenInclude(ri => ri.Ingredient)
             .ToListAsync();
     }
 
