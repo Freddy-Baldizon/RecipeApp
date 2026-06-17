@@ -21,15 +21,15 @@ public class FavoriteController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateFavoriteAsync([FromBody] CreateFavoriteRequestModel request)
     {
-        var dto =  FavoriteMapper.ToDto(request);
-        
+        var dto = FavoriteMapper.ToDto(request);
+
 
         var createdFavorite = await favoriteFacade.AddAsync(dto);
         return Created(string.Empty, createdFavorite);
     }
 
-    [HttpGet("recipe/{recipeId}")]
-      public async Task<IActionResult> GetAllByUserId(string userId)
+    [HttpGet("recipe/{userId}")]
+    public async Task<IActionResult> GetAllByUserId(string userId)
     {
         var favorites = await favoriteFacade.GetAllByUserIdAsync(int.Parse(userId));
         return Ok(favorites);
