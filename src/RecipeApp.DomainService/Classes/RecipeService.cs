@@ -1,4 +1,5 @@
 using RecipeApp.Domain.Entities;
+using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Dto;
 using RecipeApp.Exceptions;
 using RecipeApp.Infrastructure.Repositories;
@@ -28,10 +29,10 @@ public class RecipeService : IRecipeService
             Description = recipeDto.Description,
             CountryId = recipeDto.CountryId,
             UserId = recipeDto.UserId,
-            PhotoUrl = recipeDto.PhotoUrl
+            PhotoUrl = recipeDto.PhotoUrl,
         };
-
-        return await _recipeRepository.AddAsync(recipe);
+        var createdRecipe = await _recipeRepository.AddAsync(recipe,recipeDto.Ingredients);
+        return createdRecipe;
     }
 
     public Task<Recipe?> GetByRecipeNameAsync(string recipeName)

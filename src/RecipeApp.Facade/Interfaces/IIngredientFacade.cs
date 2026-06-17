@@ -4,6 +4,7 @@ namespace RecipeApp.Facade.Interfaces
 {
     public interface IIngredientFacade
     {
+        Task<List<IngredientDto>> GetAllAsync();
         Task<IngredientDto> AddAsync(IngredientDto ingredientDto);
         Task<IngredientDto> GetByNameAsync(string name);
         Task<IngredientDto> GetByIdAsync(int id);

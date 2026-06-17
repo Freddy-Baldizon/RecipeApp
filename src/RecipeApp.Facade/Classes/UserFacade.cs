@@ -33,18 +33,18 @@ public class UserFacade : IUserFacade
     public async Task<UserDto?> GetByEmailAsync(string email)
     {
         var user = await userService.GetByEmailAsync(email);
-        return UserMapper.ToDto(user);  
+        return UserMapper.ToDto(user!);  
     }
 
     public async Task<UserDto?> GetByIdAsync(int id)
     {
         var user = await userService.GetByIdAsync(id);
-        return UserMapper.ToDto(user);    }
+        return UserMapper.ToDto(user!);    }
 
     public async Task<UserDto?> GetByUsername(string username)
     {
         var user = await userService.GetByUsername(username);
-        return UserMapper.ToDto(user);  
+        return UserMapper.ToDto(user!);  
     }
 
     public async Task<UserDto> UpdateAsync(int id, UpdateUserDto userDto)

@@ -25,7 +25,7 @@ public class RecipeController(IRecipeFacade recipeFacade) : ControllerBase
         var allRecipesModel = RecipeMapper.ToModel(allRecipes);
         return Ok(allRecipesModel);
     }
-    [HttpGet("{recipeName}")]
+    [HttpGet("name/{recipeName}")]
     public async Task<IActionResult> GetByName(string recipeName)
     {
         var recipe = await recipeFacade.GetByRecipeNameAsync(recipeName);

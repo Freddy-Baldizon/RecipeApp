@@ -1,3 +1,4 @@
+using RecipeApp.Domain.Entities;
 using RecipeApp.DomainService.Interfaces;
 using RecipeApp.Dto;
 using RecipeApp.Exceptions;
@@ -15,6 +16,10 @@ public class IngredientFacade : IIngredientFacade
         this.ingredientService = ingredientService;
     }
 
+    public async Task<List<IngredientDto>> GetAllAsync()
+    {
+        return IngredientMapper.ToDto(await ingredientService.GetAllAsync());
+    }
     public async Task<IngredientDto> AddAsync(IngredientDto createDto)
     {
         var ingredient = await ingredientService.AddAsync(createDto);

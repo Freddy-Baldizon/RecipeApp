@@ -39,6 +39,14 @@ public class IngredientController : ControllerBase
         return Ok(IngredientMapper.ToModel(ingredientDto));
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAllIngredients()
+    {
+        var allIngredients = await ingredientFacade.GetAllAsync();
+        var allIngredientsModel = IngredientMapper.ToModel(allIngredients);
+        return Ok(allIngredientsModel);
+    }
+
     [HttpGet("recipe/{recipeId}")]
     public async Task<IActionResult> GetAllByRecipeId(string recipeId)
     {
