@@ -25,6 +25,18 @@ public class RecipeController(IRecipeFacade recipeFacade) : ControllerBase
         var allRecipesModel = RecipeMapper.ToModel(allRecipes);
         return Ok(allRecipesModel);
     }
+    [HttpGet("{recipeName}")]
+    public async Task<IActionResult> GetByName(string recipeName)
+    {
+        var recipe = await recipeFacade.GetByRecipeNameAsync(recipeName);
+        if (recipe == null)
+        {
+            return NotFound("Recipe not found");
+        }
+        var recipeModel = RecipeMapper.ToModel(recipe);
+        return Ok(recipeModel);
+    }
+
 
     [HttpGet("{recipeId}")]
     public async Task<IActionResult> GetById(string recipeId)
