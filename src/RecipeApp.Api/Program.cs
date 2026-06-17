@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,6 +29,7 @@ builder.Services.AddControllers(options =>
 .AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
 // var allowedOrigins = builder.Configuration
@@ -125,7 +126,7 @@ builder.Services.AddRateLimiter(options =>
     {
         context.HttpContext.Response.ContentType = "application/json";
         await context.HttpContext.Response.WriteAsync(
-"""{"status":429,"message":"Demasiadas solicitudes. Intente nuevamente más tarde."}""",
+"""{"status":429,"message":"Demasiadas solicitudes. Intente nuevamente mÃ¡s tarde."}""",
 cancellationToken: token
 );
     };
@@ -154,3 +155,4 @@ app.UseRateLimiter();
 app.MapControllers().RequireRateLimiting("fixed");
 
 app.Run();
+
