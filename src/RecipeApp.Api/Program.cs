@@ -126,7 +126,7 @@ builder.Services.AddRateLimiter(options =>
     {
         context.HttpContext.Response.ContentType = "application/json";
         await context.HttpContext.Response.WriteAsync(
-"""{"status":429,"message":"Demasiadas solicitudes. Intente nuevamente mÃ¡s tarde."}""",
+"""{"status":429,"message":"Demasiadas solicitudes. Intente nuevamente más tarde."}""",
 cancellationToken: token
 );
     };
