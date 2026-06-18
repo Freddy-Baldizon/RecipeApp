@@ -32,7 +32,8 @@ public class FavoriteController : ControllerBase
     public async Task<IActionResult> GetAllByUserId(string userId)
     {
         var favorites = await favoriteFacade.GetAllByUserIdAsync(int.Parse(userId));
-        return Ok(favorites);
+        var favoritesModel = FavoriteMapper.ToModel(favorites);
+        return Ok(favoritesModel);
     }
 
     [HttpDelete("{favoriteId}")]
