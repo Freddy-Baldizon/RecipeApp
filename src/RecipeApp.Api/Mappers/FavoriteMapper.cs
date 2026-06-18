@@ -17,12 +17,13 @@ namespace RecipeApp.Api.Mappers
 
             return dto;
         }
-        public static FavoriteResponseModel ToModel(FavoriteDto FavoriteDto)
+        public static FavoriteResponseModel ToModel(FavoriteDto favoriteDto)
         {
             return new FavoriteResponseModel
             {
-                recipeId = FavoriteDto.RecipeId,
-                createdAt = FavoriteDto.CreatedAt
+                recipeId = favoriteDto.RecipeId,
+                createdAt = favoriteDto.CreatedAt,
+                Recipe = favoriteDto.Recipe != null ? RecipeMapper.ToModel(favoriteDto.Recipe) : null
             };
         }
 

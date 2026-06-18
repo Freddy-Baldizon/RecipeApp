@@ -35,9 +35,9 @@ public class FavoriteService : IFavoriteService
         await _favoriteRepository.DeleteAsync(favorite);
     }
 
-    public Task<List<Favorite>> GetAllByUserIdAsync(int recipeId)
+    public async Task<List<Favorite>> GetAllByUserIdAsync(int recipeId)
     {
-        return _favoriteRepository.GetByUserAsync(recipeId);
+        return await _favoriteRepository.GetByUserAsync(recipeId);
     }
 
     public Task<Favorite?> GetByRecipeIdAsync(int recipeId)

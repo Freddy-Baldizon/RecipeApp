@@ -15,7 +15,8 @@ namespace RecipeApp.Facade.Mappers
             {
                 UserId = favorite.UserId,
                 CreatedAt = favorite.CreatedAt,
-                RecipeId = favorite.RecipeId
+                RecipeId = favorite.RecipeId,
+                Recipe = favorite.Recipe != null ? RecipeMapper.ToDto(favorite.Recipe) : null
             };
         }
     }

@@ -28,11 +28,12 @@ public class FavoriteController : ControllerBase
         return Created(string.Empty, createdFavorite);
     }
 
-    [HttpGet("recipe/{recipeId}")]
-      public async Task<IActionResult> GetAllByUserId(string userId)
+    [HttpGet("recipe/{userId}")]
+    public async Task<IActionResult> GetAllByUserId(string userId)
     {
         var favorites = await favoriteFacade.GetAllByUserIdAsync(int.Parse(userId));
-        return Ok(favorites);
+        var favoritesModel = FavoriteMapper.ToModel(favorites);
+        return Ok(favoritesModel);
     }
 
     [HttpDelete("{favoriteId}")]

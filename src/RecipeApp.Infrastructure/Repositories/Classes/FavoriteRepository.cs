@@ -15,7 +15,11 @@ namespace RecipeApp.Infrastructure.Repositories.Classes
 
         public async Task<List<Favorite>> GetByUserAsync(int userId)
         {
-            List<Favorite> results = await _dbContext.Favorite.Where(f => f.UserId == userId).ToListAsync();
+            List<Favorite> results = await _dbContext.Favorite
+            .Where(f => f.UserId == userId)
+            .Include(f => f.Recipe).ThenInclude(r => r.Country)
+            .Include(f => f.Recipe).ThenInclude(r => r.User)
+            .ToListAsync();
             return results;
         }
 
