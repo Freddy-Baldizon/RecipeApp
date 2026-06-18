@@ -50,6 +50,15 @@ public class RecipeController(IRecipeFacade recipeFacade) : ControllerBase
         return Ok(recipeModel);
     }
 
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetByUserId(string userId)
+    {
+        var recipes = await recipeFacade.GetAllAsync();
+        var filteredRecipes = recipes.FindAll(recipe => recipe.UserId == int.Parse(userId));
+        var recipeModel = RecipeMapper.ToModel(filteredRecipes);
+        return Ok(recipeModel);
+    }
+
     [HttpPut("{recipeId}")]
     public async Task<IActionResult> UpdateRecipe(string recipeId, [FromBody] UpdateRecipeRequestModel model)
     {
