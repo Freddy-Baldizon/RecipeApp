@@ -20,7 +20,9 @@ public class FavoriteService : IFavoriteService
         var favorite = new Favorite
         {
             RecipeId = favoriteDto.RecipeId,
-            UserId = favoriteDto.UserId
+            UserId = favoriteDto.UserId,
+            CreatedAt = DateTime.Now
+            
         };
         return _favoriteRepository.AddAsync(favorite);
     }
