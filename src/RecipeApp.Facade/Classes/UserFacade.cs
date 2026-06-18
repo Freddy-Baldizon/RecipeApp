@@ -51,6 +51,7 @@ public class UserFacade : IUserFacade
 
         return new LoginResponseDto
         {
+            id = user.Id,
             avatar = user.Avatar,
             email = user.Email,
             last_session = DateTime.Now,
