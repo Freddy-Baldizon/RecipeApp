@@ -15,8 +15,14 @@ public class FavoriteService : IFavoriteService
         _favoriteRepository = favoriteRepository;
     }
 
-    public Task<Favorite> AddAsync(FavoriteDto favoriteDto)
+    public async Task<Favorite> AddAsync(FavoriteDto favoriteDto)
     {
+        var existing = await _favoriteRepository.GetFavoriteAsync(favoriteDto.UserId, favoriteDto.RecipeId);
+        if (existing != null)
+        {
+            throw new DuplicateResourceException($"Recipe {favoriteDto.RecipeId} is already in favorites for user {favoriteDto.UserId}.");
+        }
+
         var favorite = new Favorite
         {
             RecipeId = favoriteDto.RecipeId,
@@ -24,31 +30,21 @@ public class FavoriteService : IFavoriteService
             CreatedAt = DateTime.Now
             
         };
-        return _favoriteRepository.AddAsync(favorite);
+        return await _favoriteRepository.AddAsync(favorite);
     }
 
-    public async Task DeleteAsync(int recipeId)
+    public async Task<List<Favorite>> GetAllByUserIdAsync(int userId)
     {
-        var favorite = await _favoriteRepository.GetFavoriteByIdAsync(recipeId);
+        return await _favoriteRepository.GetByUserAsync(userId);
+    }
+
+    public async Task DeleteAsync(int userId, int recipeId)
+    {
+        var favorite = await _favoriteRepository.GetFavoriteAsync(userId, recipeId);
         if (favorite == null)
         {
-            throw new ResourceNotFoundException($"Comment with ID {recipeId} not found.");
+            throw new ResourceNotFoundException($"Favorite for user {userId} and recipe {recipeId} not found.");
         }
         await _favoriteRepository.DeleteAsync(favorite);
     }
-
-    public async Task<List<Favorite>> GetAllByUserIdAsync(int recipeId)
-    {
-        return await _favoriteRepository.GetByUserAsync(recipeId);
-    }
-
-    public Task<Favorite?> GetByRecipeIdAsync(int recipeId)
-    {
-        var favorite = _favoriteRepository.GetFavoriteByIdAsync(recipeId);
-        if (favorite == null)
-        {
-            throw new ResourceNotFoundException($"Comment with ID {recipeId} not found.");
-        }
-        return favorite;
-    }
-}   
+}

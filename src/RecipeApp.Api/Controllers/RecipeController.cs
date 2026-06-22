@@ -38,7 +38,7 @@ public class RecipeController(IRecipeFacade recipeFacade) : ControllerBase
     }
 
 
-    [HttpGet("{recipeId}")]
+    [HttpGet("{recipeId:int}")]
     public async Task<IActionResult> GetById(string recipeId)
     {
         var recipe = await recipeFacade.GetByIdAsync(int.Parse(recipeId));
