@@ -8,13 +8,18 @@ namespace RecipeApp.Api.Mappers
     {
         public static RecipeDto ToDto(CreateRecipeRequestModel recipeRequestModel)
         {
+            foreach (var item in recipeRequestModel.RecipeIngredientsDto)
+            {
+                Console.WriteLine(item.IngredientId);
+            }
             return new RecipeDto
             {
                 Name = recipeRequestModel.Name,
                 Description = recipeRequestModel.Description,
                 CountryId = recipeRequestModel.CountryId,
                 UserId = recipeRequestModel.UserId,
-                PhotoUrl = recipeRequestModel.PhotoUrl
+                PhotoUrl = recipeRequestModel.PhotoUrl,
+                Ingredients = recipeRequestModel.RecipeIngredientsDto
             };
         }
 
@@ -36,9 +41,8 @@ namespace RecipeApp.Api.Mappers
                 UserId = recipeDto.UserId,
                 Username = recipeDto.Username,
                 PhotoUrl = recipeDto.PhotoUrl,
-                FavoritesCount = recipeDto.FavoritesCount,
-                Ingredients = recipeDto.Ingredients.Where(i => i is not null).Select(i => IngredientMapper.ToModel(i!)).ToList(),
-                Comments = recipeDto.Comments.Where(c => c is not null).Select(c => CommentMapper.ToModel(c!)).ToList(),
+                Ingredients = recipeDto.Ingredients,
+                Comments = recipeDto.Comments.Where(c => c is not null).Select(c => CommentMapper.ToModel(c!)).ToList()
             };
         }
 

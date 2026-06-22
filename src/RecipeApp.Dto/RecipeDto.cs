@@ -11,7 +11,6 @@ public class RecipeDto
     public string? CountryName { get; set; }
     public string? Username { get; set; }
     public string? PhotoUrl { get; set; }
-    public int FavoritesCount { get; set; } 
-    public List<IngredientDto?> Ingredients { get; set; } = [];
+    public List<RecipeIngredientDto> Ingredients { get; set; } = [];
     public List<CommentDto?> Comments { get; set; } = [];
 }

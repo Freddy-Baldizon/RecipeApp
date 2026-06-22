@@ -39,7 +39,7 @@ public class UserFacade : IUserFacade
     public async Task<UserDto?> GetByEmailAsync(string email)
     {
         var user = await userService.GetByEmailAsync(email);
-        return UserMapper.ToDto(user);  
+        return UserMapper.ToDto(user!);  
     }
 
     public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
@@ -51,6 +51,7 @@ public class UserFacade : IUserFacade
 
         return new LoginResponseDto
         {
+            id = user.Id,
             avatar = user.Avatar,
             email = user.Email,
             last_session = DateTime.Now,
@@ -61,12 +62,12 @@ public class UserFacade : IUserFacade
     public async Task<UserDto?> GetByIdAsync(int id)
     {
         var user = await userService.GetByIdAsync(id);
-        return UserMapper.ToDto(user);    }
+        return UserMapper.ToDto(user!);    }
 
     public async Task<UserDto?> GetByUsername(string username)
     {
         var user = await userService.GetByUsername(username);
-        return UserMapper.ToDto(user);  
+        return UserMapper.ToDto(user!);  
     }
 
     public async Task<UserDto> UpdateAsync(int id, UpdateUserDto userDto)

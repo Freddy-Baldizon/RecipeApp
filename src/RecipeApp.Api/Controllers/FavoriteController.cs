@@ -21,6 +21,8 @@ public class FavoriteController : ControllerBase
     public async Task<IActionResult> CreateFavoriteAsync([FromBody] CreateFavoriteRequestModel request)
     {
         var dto = FavoriteMapper.ToDto(request);
+
+
         var createdFavorite = await favoriteFacade.AddAsync(dto);
         return Created(string.Empty, createdFavorite);
     }
