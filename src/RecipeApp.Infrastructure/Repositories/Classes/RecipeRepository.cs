@@ -17,6 +17,7 @@ public class RecipeRepository : IRecipeRepository
         return await _dbContext.Recipe
             .Include(r => r.User)
             .Include(r => r.Country)
+             .Include(r => r.Favorites)
             .ToListAsync();
     }
 
@@ -25,6 +26,7 @@ public class RecipeRepository : IRecipeRepository
         return await _dbContext.Recipe
             .Include(r => r.User)
             .Include(r => r.Country)
+             .Include(r => r.Favorites)
             .FirstOrDefaultAsync(r => r.Id == id);
     }
 

@@ -36,8 +36,9 @@ namespace RecipeApp.Api.Mappers
                 UserId = recipeDto.UserId,
                 Username = recipeDto.Username,
                 PhotoUrl = recipeDto.PhotoUrl,
+                FavoritesCount = recipeDto.FavoritesCount,
                 Ingredients = recipeDto.Ingredients.Where(i => i is not null).Select(i => IngredientMapper.ToModel(i!)).ToList(),
-                Comments = recipeDto.Comments.Where(c => c is not null).Select(c => CommentMapper.ToModel(c!)).ToList()
+                Comments = recipeDto.Comments.Where(c => c is not null).Select(c => CommentMapper.ToModel(c!)).ToList(),
             };
         }
 

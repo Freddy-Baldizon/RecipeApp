@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RecipeApp.Api.Mappers;
 using RecipeApp.Api.Models.Requests;
-using RecipeApp.Dto;
 using RecipeApp.Facade.Interfaces;
 
 namespace RecipeApp.Api.Controllers;
@@ -18,28 +16,29 @@ public class FavoriteController : ControllerBase
         this.favoriteFacade = favoriteFacade;
     }
 
+    // POST /api/favorite  — body: { userId, recipeId }
     [HttpPost]
     public async Task<IActionResult> CreateFavoriteAsync([FromBody] CreateFavoriteRequestModel request)
     {
-        var dto =  FavoriteMapper.ToDto(request);
-        
-
+        var dto = FavoriteMapper.ToDto(request);
         var createdFavorite = await favoriteFacade.AddAsync(dto);
         return Created(string.Empty, createdFavorite);
     }
 
-    [HttpGet("recipe/{userId}")]
-    public async Task<IActionResult> GetAllByUserId(string userId)
+    // GET /api/favorite/user/{userId}
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetAllByUserId(int userId)
     {
-        var favorites = await favoriteFacade.GetAllByUserIdAsync(int.Parse(userId));
+        var favorites = await favoriteFacade.GetAllByUserIdAsync(userId);
         var favoritesModel = FavoriteMapper.ToModel(favorites);
         return Ok(favoritesModel);
     }
 
-    [HttpDelete("{favoriteId}")]
-    public async Task<IActionResult> DeleteFavorite(string favoriteId)
+    // DELETE /api/favorite/{userId}/{recipeId}
+    [HttpDelete("{userId}/{recipeId}")]
+    public async Task<IActionResult> DeleteFavorite(int userId, int recipeId)
     {
-        await favoriteFacade.DeleteAsync(int.Parse(favoriteId));
+        await favoriteFacade.DeleteAsync(userId, recipeId);
         return NoContent();
     }
 }

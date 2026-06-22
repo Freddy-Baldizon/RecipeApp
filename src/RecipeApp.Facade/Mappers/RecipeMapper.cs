@@ -20,7 +20,8 @@ namespace RecipeApp.Facade.Mappers
                 CountryName = recipe.Country?.Name,
                 Username = recipe.User?.Username,
                 Description = recipe.Description,
-                PhotoUrl = recipe.PhotoUrl
+                PhotoUrl = recipe.PhotoUrl,
+                FavoritesCount = recipe.Favorites.Count
             };
         }
     }

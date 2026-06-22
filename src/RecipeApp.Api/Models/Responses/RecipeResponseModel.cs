@@ -11,6 +11,7 @@ public class RecipeResponseModel
     public int UserId { get; set; }
     public string? Username { get; set; }
     public string? PhotoUrl { get; set; }
+    public int FavoritesCount { get; set; } 
     public List<IngredientResponseModel> Ingredients { get; set; } = new();
     public List<CommentResponseModel> Comments { get; set; } = new();
 }

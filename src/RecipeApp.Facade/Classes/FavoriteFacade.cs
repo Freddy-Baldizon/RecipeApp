@@ -20,14 +20,14 @@ public class FavoriteFacade : IFavoriteFacade
         return FavoriteMapper.ToDto(favorite);
     }
 
-    public async Task DeleteAsync(int favoriteId)
-    {
-        await favoriteService.DeleteAsync(favoriteId);
-    }
-
     public async Task<List<FavoriteDto>> GetAllByUserIdAsync(int userId)
     {
         var favorites = await favoriteService.GetAllByUserIdAsync(userId);
         return FavoriteMapper.ToDto(favorites);
+    }
+
+    public async Task DeleteAsync(int userId, int recipeId)
+    {
+        await favoriteService.DeleteAsync(userId, recipeId);
     }
 }

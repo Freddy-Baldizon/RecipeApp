@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RecipeApp.Domain\RecipeApp.Domain.csproj" />
+    <ProjectReference Include="..\RecipeApp.Exceptions\RecipeApp.Exceptions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
